@@ -1,0 +1,21 @@
+.link {
+    position: relative;
+    color: var(--link-color-default, var(--accent-color-400, #1C6BBA));
+    &:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transition: all .3s ease;
+        z-index: -1;
+    }
+    &:hover {
+        color: var(--link-color-hover, var(--accent-color-500, #165695));
+    }
+    &:focus {
+        &:before {
+            inset: -4px;
+            border: 1px solid var(--accent-color-400, #1C6BBA);
+            border-radius: 4px;
+        }
+    }
+}

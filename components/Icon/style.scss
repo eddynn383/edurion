@@ -1,0 +1,21 @@
+.icon {
+    &[data-status="default"] {
+        color: var(--icon-default, var(--text-color-600, #959595))
+    }
+
+    &[data-status="success"] {
+        color: var(--icon-success, var(--success-color-400, #4CB963))
+    }
+
+    &[data-status="fail"] {
+        color: var(--icon-fail, var(--fail-color-400, #BA2D0B))
+    }
+
+    &[data-status="warning"] {
+        color: var(--icon-warning, var(--warning-color-400, #FF9F1C))
+    }
+
+    &[data-status="info"] {
+        color: var(--icon-info, var(--info-color-400, #58C4CE))
+    }
+}

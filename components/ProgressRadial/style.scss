@@ -1,0 +1,24 @@
+.radial-progress {
+    width: 100px;
+    height: 100px;
+}
+
+.radial-progress__background {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 10;
+}
+
+.radial-progress__progress {
+    fill: none;
+    stroke: blue;
+    stroke-width: 10;
+    stroke-dasharray: 440;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+
+.radial-progress__percentage {
+    font-size: 0.3em;
+    fill: black;
+}
