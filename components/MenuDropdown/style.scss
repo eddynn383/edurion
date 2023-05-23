@@ -1,0 +1,14 @@
+.menu-dropdown {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: calc(100% + 20px);
+    bottom: 0;
+    background-color: var(--menu-dropdown-background, var(--background-color-950, #242424));
+    opacity: 0;
+    transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    &[data-show="true"] {
+        left: 0;
+        opacity: 1;
+    }
+}
