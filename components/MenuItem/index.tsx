@@ -21,11 +21,11 @@ const MenuItem = ({ id, style, item, depthLevel, theme = "light" }: IPropsMenuIt
             {
                 item.children ? (
                     <>
-                        <NoLink title={item.title} iconBefore={item.icon && <Icon value={item.icon} />} text={item.title} iconAfter={<Icon value="chevron-right" />} theme={theme} onClick={() => setShow(prev => !prev)} />
+                        <NoLink title={item.title} iconBefore={item.icon && <Icon value={item.icon} theme={theme} />} text={item.title} iconAfter={<Icon value="chevron-right" theme={theme} />} theme={theme} onClick={() => setShow(prev => !prev)} />
                         <MenuDropdown items={item.children} parent={item.title} setShow={setShow} show={show} depthLevel={depthLevel} theme={theme} />
                     </>
                 ) : (
-                    <Link to={item.url} title={item.title} iconBefore={item.icon && <Icon value={item.icon} />} text={item.title} theme={theme} />
+                    <Link to={item.url} title={item.title} iconBefore={item.icon && <Icon value={item.icon} theme={theme} />} text={item.title} theme={theme} />
                 )
             }
         </li>

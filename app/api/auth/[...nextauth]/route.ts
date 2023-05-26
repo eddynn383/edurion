@@ -95,7 +95,7 @@ export const authOptions: NextAuthOptions = {
                 console.log("***** jwt callback *****");
                 token.id = userData?.id;
                 token.roles = userData?.roles;
-                token.theme = userData?.theme;
+                // token.theme = userData?.theme;
             }
 
             return token;
@@ -106,7 +106,7 @@ export const authOptions: NextAuthOptions = {
                 console.log("***** session callback *****");
                 session.user.id = token.id;
                 session.user.roles = token.roles;
-                session.user.theme = token.theme;
+                // session.user.theme = token.theme;
             }
 
             return session;

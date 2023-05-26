@@ -1,6 +1,9 @@
 .icon {
-    &[data-status="default"] {
-        color: var(--icon-default, var(--text-color-600, #959595))
+    &[data-status="default"][data-theme="light"] {
+        color: var(--icon-default, var(--text-color-100, #181818))
+    }
+    &[data-status="default"][data-theme="dark"] {
+        color: var(--icon-default, var(--text-color-950, #ffffff))
     }
 
     &[data-status="success"] {

@@ -3,13 +3,18 @@
 import { useState, useEffect } from "react";
 import { IPropsDrawer } from "./interface";
 import sx from "@/styles/component.module.scss";
+import ReactDOM from "react-dom";
 
 const Drawer = ({ id, style, theme = "light", width, state, onClickOutside, children }: IPropsDrawer) => {
     const [delayedState, setDelayedState] = useState("");
-
+    const [el, setEl] = useState<HTMLElement | null>(null);
     const innerStyle = {
         "width": width,
     }
+
+    useEffect(() => {
+        setEl(document.getElementById("drawer-root"));
+    }, []);
 
     useEffect(() => {
         if (state) {
@@ -24,13 +29,18 @@ const Drawer = ({ id, style, theme = "light", width, state, onClickOutside, chil
         }
     }, [state]);
 
-    return (
+    if (el === null) {
+        return null;
+    }
+
+    return ReactDOM.createPortal(
         <div className={sx["drawer"]} id={id} style={style} data-width={width} data-state={delayedState} data-theme={theme}>
             <div className={sx["drawer-mask"]} onClick={onClickOutside}></div>
             <div className={sx["drawer-inner"]} style={innerStyle}>
                 {children}
             </div>
-        </div>
+        </div>,
+        el
     );
 };
 

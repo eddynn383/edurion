@@ -16,7 +16,7 @@ const MenuDropdown = ({ items, parent, show, setShow, depthLevel, theme = "light
         <>
             {items && items.length > 0 && (
                 <ul className={`${sx['menu-dropdown']}`} data-show={show}>
-                    <NoLink id="back-to" title={parent} iconBefore={<Icon value="chevron-left" />} text={parent} theme={theme} onClick={() => setShow(false)} />
+                    <NoLink id="back-to" title={parent} iconBefore={<Icon value="chevron-left" theme={theme} />} text={parent} theme={theme} onClick={() => setShow(false)} />
                     {
                         items?.map((item: any, i: React.Key) => (
                             <MenuItem item={item} key={i} depthLevel={depthLevel} theme={theme} />

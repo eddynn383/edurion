@@ -18,13 +18,13 @@ const PageHead = ({ theme }: any) => {
                     <Button type="button" size="medium" variant="solid" status="accent" content="text" theme={theme}>Create</Button>
                     <Button type="button" size="medium" variant="neutral" status="neutral" surface="2" content="icon" theme={theme}>
                         <>
-                            <Icon value="comment" />
+                            <Icon value="comment" theme={theme} />
                             <Badge value={55} max={50} theme={theme} size="medium" />
                         </>
                     </Button>
                     <Button type="button" size="medium" variant="neutral" status="neutral" surface="2" content="icon" theme={theme} >
                         <>
-                            <Icon value="bell" />
+                            <Icon value="bell" theme={theme} />
                             <Badge value={1} theme={theme} size="small" />
                         </>
                     </Button>

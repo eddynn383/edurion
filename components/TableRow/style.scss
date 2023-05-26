@@ -3,6 +3,15 @@
     flex: 1 0 auto;
 
     & + & {
-        border-top: var(--border-width-100) solid var(--border-color-100);
+        border-top-width: var(--border-width-100);
+        border-top-style: solid;
     }
+}
+
+[data-theme="light"] .table-row + .table-row {
+    border-top-color: var(--table-row-light-separator-color, var(--border-color-100))
+}
+
+[data-theme="dark"] .table-row + .table-row {
+    border-top-color: var(--table-row-dark-separator-color, var(--border-color-900))
 }

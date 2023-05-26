@@ -25,12 +25,15 @@ const LoginForm = ({ cn, theme }: any) => {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
+        if (!validate("login")) return;
+        console.log("test")
 
-        if (!validate()) return;
+        console.log(email)
+        console.log(password)
 
         setLoading(true);
 
-        await signIn("credentials", {
+        const result = await signIn("credentials", {
             redirect: false,
             email,
             password,
@@ -52,6 +55,7 @@ const LoginForm = ({ cn, theme }: any) => {
 
     return (
         <div className={cn}>
+            {loading && <Loading />}
             <ThirdPartyLogin theme={theme} />
             <span className={sx["form_separator"]}>or continue with email</span>
             <form className={sx["form_group"]} onSubmit={handleSubmit}>
@@ -79,8 +83,7 @@ const LoginForm = ({ cn, theme }: any) => {
                 </InputGroup>
                 <Button size="large" type="submit" theme={theme}>Sign in</Button>
             </form>
-            <p className={sx.link}>Dont have an account yet? <Link href="/auth/register">Sign up</Link></p>
-            {loading && <Loading />}
+            <p className={sx.link}>Don't have an account yet? <Link href="/auth/register">Sign up</Link></p>
         </div>
     )
 }

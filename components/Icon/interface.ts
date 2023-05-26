@@ -1,4 +1,4 @@
-import { Status } from "@/interfaces/global";
+import { Status, Theme } from "@/interfaces/global";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 export interface IPropsIcon {
@@ -6,5 +6,6 @@ export interface IPropsIcon {
     status?: Status;
     shake?: boolean;
     beatFade?: boolean;
+    theme?: Theme;
     style?: React.CSSProperties;
 }

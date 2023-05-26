@@ -1,22 +1,21 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { IPropsInput } from "./interface";
-import Label from "@/components/Label";
+import { useEffect, useState } from "react";
 import Icon from "../Icon";
 
 import sx from "@/styles/component.module.scss";
 
-const Input = ({ id, name, type, innerRef, placeholder, value, required, autoComplete, ariaInvalid, ariaDescribedBy, style, theme = "light", variant = "outline", shade = "100", size = "medium", status = "default", iconBefore, iconAfter, onClick, onChange }: IPropsInput) => {
+const Textarea = ({ id, name, type, innerRef, placeholder, rows, columns, value, required, autoComplete, ariaInvalid, ariaDescribedBy, style, theme = "light", variant = "outline", shade = "100", size = "medium", status = "default", allowResize = "both", iconBefore, iconAfter, onClick, onChange }: any) => {
     const [inputType, setInputType] = useState(type);
     const [currentStatus, setCurrentStatus] = useState(status);
     const [focus, setFocus] = useState(false);
-    const [error, setError] = useState(false);
 
     const innerProps = {
         name,
         id,
         placeholder,
+        rows,
+        columns,
         value,
         required,
         autoComplete,
@@ -40,10 +39,10 @@ const Input = ({ id, name, type, innerRef, placeholder, value, required, autoCom
     }, [status])
 
     return (
-        <div className={sx["input"]} id={id} style={style} data-theme={theme} data-variant={variant} data-shade={shade} data-size={size} data-status={currentStatus} data-icon={iconBefore && iconAfter ? 'both' : iconBefore ? 'before' : iconAfter ? 'after' : null} data-focus={focus}>
+        <div className={sx["textarea"]} id={id} style={style} data-theme={theme} data-variant={variant} data-shade={shade} data-size={size} data-status={currentStatus} data-icon={iconBefore && iconAfter ? 'both' : iconBefore ? 'before' : iconAfter ? 'after' : null} data-resize={allowResize} data-focus={focus}>
             {iconBefore}
             {
-                <input className={sx["input-inner"]} {...innerProps} type={inputType} aria-invalid={ariaInvalid} aria-describedby={ariaDescribedBy} />
+                <textarea className={sx["textarea-inner"]} {...innerProps} aria-invalid={ariaInvalid} aria-describedby={ariaDescribedBy} />
             }
             {iconAfter}
             {currentStatus === "success" && <Icon value="circle-check" status={currentStatus} beatFade={true} style={{ "--fa-animation-iteration-count": "0.2s" } as React.CSSProperties} />}
@@ -52,4 +51,4 @@ const Input = ({ id, name, type, innerRef, placeholder, value, required, autoCom
     )
 }
 
-export default Input
+export default Textarea

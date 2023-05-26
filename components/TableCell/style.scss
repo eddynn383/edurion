@@ -6,7 +6,23 @@
     font-size: 14px;
     font-weight: 400;
     text-transform: uppercase;
-    color: var(--text-color-200);
-    padding: var(--padding-200) var(--padding-200);
+    padding: var(--padding-300) var(--padding-300);
     text-align: left;
+    &[data-size="full"] {
+        width: 100%;
+    }
+    &[data-size="half"] {
+        width: 50%;
+    }
+    &[data-size="inline"] {
+        width: fit-content;
+    }
+}
+
+[data-theme="light"] .table-cell {
+    color: var(--table-light-text-color, var(--text-color-100, #181818));
+}
+
+[data-theme="dark"] .table-cell {
+    color: var(--table-dark-text-color, var(--text-color-950, #ffffff));
 }

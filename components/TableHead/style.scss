@@ -1,6 +1,13 @@
 .table-head {
-    background-color: var(--background-color-200);
     border-radius: var(--border-radius-200);
     width: fit-content;
     min-width: 100%;
+}
+
+[data-theme="light"] .table-head {
+    background-color: var(--background-color-150, #F0F2F4);
+}
+
+[data-theme="dark"] .table-head {
+    background-color: var(--background-color-900, #2E2F30);
 }

@@ -30,33 +30,33 @@ const staticMenu: IMenuItem[] = [
         icon: "book",
     },
     {
-        title: "Manager",
+        title: "Management",
         url: "/management",
         icon: "suitcase",
         children: [
             {
                 title: "Courses",
-                url: "/courses",
+                url: "/management/courses",
                 icon: "book-open"
             },
             {
                 title: "Users",
-                url: "/users",
+                url: "/management/users",
                 icon: "users"
             },
             {
                 title: "Tests",
-                url: "/tests",
+                url: "/management/tests",
                 icon: "vials",
                 children: [
                     {
                         title: "Test 1",
-                        url: "/test-1",
+                        url: "/management/tests/test-1",
                         icon: "vial",
                     },
                     {
                         title: "Test 2",
-                        url: "/test-2",
+                        url: "/management/tests/test-2",
                         icon: "vial",
                     }
                 ]
@@ -97,9 +97,9 @@ export default function UserLayout({ children }: IPropsUserLayout) {
             <div className={sx.right}>
                 <div className={sx.inner}>
                     <PageHead theme={theme} />
-                    {/* <PageBody > */}
-                    {children}
-                    {/* </PageBody> */}
+                    <PageBody >
+                        {children}
+                    </PageBody>
                 </div>
             </div>
         </div>

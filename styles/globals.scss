@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap');
+
 :root {
     --accent-color-100: #A4C4E3;
     --accent-color-200: #77A6D6;
@@ -201,7 +203,7 @@ html[data-theme="dark"] {
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Work Sans', sans-serif;
     font-weight: var(--font-weight-400, 400);
 
     #__next {

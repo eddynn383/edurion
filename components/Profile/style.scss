@@ -87,6 +87,7 @@
     border: 1px solid var(--dropdown-border-color, var(--background-color-850));
     border-radius: var(--dropdown-border-radius, var(--border-radius-200, 8px));
     min-width: 200px;
+    z-index: 9;
     ul {
         list-style: none;
         margin: 0;

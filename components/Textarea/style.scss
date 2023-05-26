@@ -1,11 +1,12 @@
-.input {
+.textarea {
     display: grid;
     grid-template-columns: auto;
     align-items: center;
-    gap: var(--input-gap, var(--gap-300, 12px));
-    border-width: var(--input-border-width-default, var(--border-width-100, 1px));
+    gap: var(--textarea-gap, var(--gap-300, 12px));
+    border-width: var(--textarea-border-width-default, var(--border-width-100, 1px));
     border-style: solid;
     border-radius: var(--border-radius-200, 10px);
+    width: fit-content;
 
     .icon {
         align-items: center;
@@ -36,18 +37,18 @@
     &[data-focus="true"] {
         &:before {
             inset: -4px;
-            border-color: var(--input-border-color-focus, var(--accent-color-400, #1C6BBA));
+            border-color: var(--textarea-border-color-focus, var(--accent-color-400, #1C6BBA));
         }
     }
 
     &[data-status="fail"] {
         &:before {
             inset: -4px;
-            border-color: var(--input-border-color-fail, var(--fail-color-400, #BA2D0B));
+            border-color: var(--textarea-border-color-fail, var(--fail-color-400, #BA2D0B));
         }
     }
 
-    input {
+    textarea {
         width: 100%;
         border: none;
         padding: 0;
@@ -55,8 +56,8 @@
         background: transparent;
         appearance: none;
         font-family: 'Roboto', sans-serif;
-        font-size: var(--input-font-size, var(--font-size-400, 16px));
-        line-height: var(--input-line-height, 18px);
+        font-size: var(--textarea-font-size, var(--font-size-400, 16px));
+        line-height: var(--textarea-line-height, 18px);
 
         &:focus,
         &:focus-visible {
@@ -64,45 +65,61 @@
         }
     }
 
+    &[data-resize="both"] textarea {
+        resize: both;
+    }
+
+    &[data-resize="vertical"] textarea {
+        resize: vertical;
+    }
+
+    &[data-resize="horizontal"] textarea {
+        resize: horizontal;
+    }
+
+    &[data-resize="none"] textarea {
+        resize: none;
+    }
+
     &[data-size="small"] {
-        padding: var(--input-medium-padding-y, var(--padding-200, 8px)) var(--input-medium-padding-x, var(--padding-300, 12px));
-        gap: var(--input-small-gap, var(--gap-300, 12px));
+        padding: var(--textarea-medium-padding-y, var(--padding-200, 8px)) var(--textarea-medium-padding-x, var(--padding-300, 12px));
+        gap: var(--textarea-small-gap, var(--gap-300, 12px));
 
         &:before {
             border-radius: 6px;
         }
 
-        input {
-            font-size: var(--input-small-font-size, var(--font-size-400, 16px));
-            line-height: var(--input-small-line-height, 18px);
+        textarea {
+            font-size: var(--textarea-small-font-size, var(--font-size-400, 16px));
+            line-height: var(--textarea-small-line-height, 18px);
         }
     }
 
     &[data-size="medium"] {
-        padding: var(--input-medium-padding-y, var(--padding-300, 12px)) var(--input-medium-padding-x, var(--padding-300, 12px));
-        gap: var(--input-medium-gap, var(--gap-300, 12px));
+        padding: var(--textarea-medium-padding-y, var(--padding-300, 12px)) var(--textarea-medium-padding-x, var(--padding-300, 12px));
+        gap: var(--textarea-medium-gap, var(--gap-300, 12px));
 
         &:before {
             border-radius: 8px;
         }
 
-        input {
-            font-size: var(--input-medium-font-size, var(--font-size-400, 16px));
-            line-height: var(--input-medium-line-height, 18px);
+        textarea {
+            font-size: var(--textarea-medium-font-size, var(--font-size-400, 16px));
+            line-height: var(--textarea-medium-line-height, 18px);
         }
     }
 
     &[data-size="large"] {
-        padding: var(--input-large-padding-y, var(--padding-400, 16px)) var(--input-large-padding-x, var(--padding-600, 24px));
-        gap: var(--input-large-gap, var(--gap-300, 12px));
+        padding: var(--textarea-large-padding-y, var(--padding-400, 16px)) var(--textarea-large-padding-x, var(--padding-600, 24px));
+        gap: var(--textarea-large-gap, var(--gap-300, 12px));
 
         &:before {
             border-radius: 10px;
         }
 
-        input {
-            font-size: var(--input-large-font-size, var(--font-size-400, 16px));
-            line-height: var(--input-large-line-height, 18px);
+        textarea {
+            font-size: var(--textarea-large-font-size, var(--font-size-400, 16px));
+            line-height: var(--textarea-large-line-height, 18px);
         }
     }
 
@@ -137,10 +154,10 @@
     }
 
     &[data-theme="light"][data-shade="100"] {
-        background: var(--input-background-color-default, var(--background-color-150, #F0F2F4));
-        border-color: var(--input-border-color-default, var(--border-color-150, #F0F2F4));
-        color: var(--input-text-color, var(--text-color-200, #363636));
-        input {
+        background: var(--textarea-background-color-default, var(--background-color-150, #F0F2F4));
+        border-color: var(--textarea-border-color-default, var(--border-color-150, #F0F2F4));
+        color: var(--textarea-text-color, var(--text-color-200, #363636));
+        textarea {
             color: inherit;
 
             &:-webkit-autofill,
@@ -154,28 +171,28 @@
 
             &::placeholder {
                 /* Chrome, Firefox, Opera, Safari 10.1+ */
-                color: var(--input-placeholder-color, var(--text-color-700, #5B6367));
+                color: var(--textarea-placeholder-color, var(--text-color-700, #5B6367));
                 opacity: 1;
                 /* Firefox */
             }
 
-            &:-ms-input-placeholder {
+            &:-ms-textarea-placeholder {
                 /* Internet Explorer 10-11 */
-                color: var(--input-placeholder-color, var(--text-color-700, #5B6367));
+                color: var(--textarea-placeholder-color, var(--text-color-700, #5B6367));
             }
 
-            &::-ms-input-placeholder {
+            &::-ms-textarea-placeholder {
                 /* Microsoft Edge */
-                color: var(--input-placeholder-color, var(--text-color-700, #5B6367));
+                color: var(--textarea-placeholder-color, var(--text-color-700, #5B6367));
             }
         }
     }
 
     &[data-theme="light"][data-shade="200"] {
-        background: var(--input-background-color-default, var(--background-color-200, #E1E6E9));
-        border-color: var(--input-border-color-default, var(--border-color-200, #E1E6E9));
-        color: var(--input-text-color, var(--text-color-200, #363636));
-        input {
+        background: var(--textarea-background-color-default, var(--background-color-200, #E1E6E9));
+        border-color: var(--textarea-border-color-default, var(--border-color-200, #E1E6E9));
+        color: var(--textarea-text-color, var(--text-color-200, #363636));
+        textarea {
             color: inherit;
 
             &:-webkit-autofill,
@@ -189,29 +206,29 @@
 
             &::placeholder {
                 /* Chrome, Firefox, Opera, Safari 10.1+ */
-                color: var(--input-placeholder-color, var(--text-color-700, #5B6367));
+                color: var(--textarea-placeholder-color, var(--text-color-700, #5B6367));
                 opacity: 1;
                 /* Firefox */
             }
 
-            &:-ms-input-placeholder {
+            &:-ms-textarea-placeholder {
                 /* Internet Explorer 10-11 */
-                color: var(--input-placeholder-color, var(--text-color-700, #5B6367));
+                color: var(--textarea-placeholder-color, var(--text-color-700, #5B6367));
             }
 
-            &::-ms-input-placeholder {
+            &::-ms-textarea-placeholder {
                 /* Microsoft Edge */
-                color: var(--input-placeholder-color, var(--text-color-700, #5B6367));
+                color: var(--textarea-placeholder-color, var(--text-color-700, #5B6367));
             }
         }
     }
 
     &[data-theme="dark"][data-shade="100"] {
-        background: var(--input-background-color-default, var(--background-color-950, #242424));
-        border-color: var(--input-border-color-default, var(--border-color-950, #242424));
-        color: var(--input-text-color, var(--text-color-950, #ffffff));
+        background: var(--textarea-background-color-default, var(--background-color-950, #242424));
+        border-color: var(--textarea-border-color-default, var(--border-color-950, #242424));
+        color: var(--textarea-text-color, var(--text-color-950, #ffffff));
 
-        input {
+        textarea {
             color: inherit;
 
             &:-webkit-autofill,
@@ -225,29 +242,29 @@
 
             &::placeholder {
                 /* Chrome, Firefox, Opera, Safari 10.1+ */
-                color: var(--input-placeholder-color, var(--text-color-400, #616161));
+                color: var(--textarea-placeholder-color, var(--text-color-400, #616161));
                 opacity: 1;
                 /* Firefox */
             }
 
-            &:-ms-input-placeholder {
+            &:-ms-textarea-placeholder {
                 /* Internet Explorer 10-11 */
-                color: var(--input-placeholder-color, var(--text-color-400, #616161));
+                color: var(--textarea-placeholder-color, var(--text-color-400, #616161));
             }
 
-            &::-ms-input-placeholder {
+            &::-ms-textarea-placeholder {
                 /* Microsoft Edge */
-                color: var(--input-placeholder-color, var(--text-color-400, #616161));
+                color: var(--textarea-placeholder-color, var(--text-color-400, #616161));
             }
         }
     }
 
     &[data-theme="dark"][data-shade="200"] {
-        background: var(--input-background-color-default, var(--background-color-900, #2E2F30));
-        border-color: var(--input-border-color-default, var(--border-color-900, #2E2F30));
-        color: var(--input-text-color, var(--text-color-950, #ffffff));
+        background: var(--textarea-background-color-default, var(--background-color-900, #2E2F30));
+        border-color: var(--textarea-border-color-default, var(--border-color-900, #2E2F30));
+        color: var(--textarea-text-color, var(--text-color-950, #ffffff));
 
-        input {
+        textarea {
             color: inherit;
 
             &:-webkit-autofill,
@@ -261,19 +278,19 @@
 
             &::placeholder {
                 /* Chrome, Firefox, Opera, Safari 10.1+ */
-                color: var(--input-placeholder-color, var(--text-color-400, #616161));
+                color: var(--textarea-placeholder-color, var(--text-color-400, #616161));
                 opacity: 1;
                 /* Firefox */
             }
 
-            &:-ms-input-placeholder {
+            &:-ms-textarea-placeholder {
                 /* Internet Explorer 10-11 */
-                color: var(--input-placeholder-color, var(--text-color-400, #616161));
+                color: var(--textarea-placeholder-color, var(--text-color-400, #616161));
             }
 
-            &::-ms-input-placeholder {
+            &::-ms-textarea-placeholder {
                 /* Microsoft Edge */
-                color: var(--input-placeholder-color, var(--text-color-400, #616161));
+                color: var(--textarea-placeholder-color, var(--text-color-400, #616161));
             }
         }
     }

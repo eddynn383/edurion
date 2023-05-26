@@ -19,6 +19,7 @@ const RootLayout = async ({ children }: IPropsRootLayout) => {
                 <Providers>
                     {children}
                 </Providers>
+                <div id="drawer-root"></div>
             </body>
         </html>
     );

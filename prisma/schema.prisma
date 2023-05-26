@@ -116,14 +116,19 @@ model Course {
     id           String       @id @default(auto()) @map("_id") @db.ObjectId
     title        String
     description  String
+    image        String
+    category     String
+    price        String
+    level        String
+    status       CourseStatus @default(DRAFTED)
     startDate    DateTime
     endDate      DateTime?
     students     Enrollment[]
     instructor   User         @relation("Instructor", fields: [instructorId], references: [id])
     instructorId String       @db.ObjectId
-    content      Content[]
     createdAt    DateTime     @default(now())
     updatedAt    DateTime     @updatedAt
+    content      Content[]
 
     @@map("Courses")
 }
@@ -184,6 +189,11 @@ enum EnrollmentStatus {
     ENROLLED
     COMPLETED
     DROPPED
+}
+
+enum CourseStatus {
+    DRAFTED
+    PUBLISHED
 }
 
 enum ThemeType {

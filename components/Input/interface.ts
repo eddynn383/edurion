@@ -8,12 +8,14 @@ export interface IPropsInput {
     placeholder?: string;
     label?: string;
     value?: string;
+    required?: boolean;
     autoComplete?: any;
     ariaInvalid?: any;
     ariaDescribedBy?: any;
     style?: React.CSSProperties;
     theme?: Theme;
     variant?: "solid" | "outline" | "opposite" | "text";
+    shade?: "100" | "200";
     size?: "small" | "medium" | "large";
     status?: Status;
     iconBefore?: React.ReactElement;
