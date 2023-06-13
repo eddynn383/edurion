@@ -9,7 +9,7 @@ import { IPropsSelect, Option } from "./interface";
 import sx from "@/styles/component.module.scss";
 
 
-const Select = ({ id, placeholder = "Select...", options, isMulti = false, isSearchable = false, width, style, theme = "light", state = "close", surface = "1", onChange, onClick }: IPropsSelect) => {
+const Select = ({ id, placeholder = "Select...", options, isMulti = false, isSearchable = false, width, style, state = "close", shade = "100", size = "M", onChange, onClick }: IPropsSelect) => {
 
     const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
     const [search, setSearch] = useState<string>('');
@@ -22,8 +22,8 @@ const Select = ({ id, placeholder = "Select...", options, isMulti = false, isSea
     const handleOptionClick = (option: Option) => {
         if (isMulti) {
             setSelectedOptions((prevSelected) =>
-                prevSelected.some((item) => item.value === option.value)
-                    ? prevSelected.filter((item) => item.value !== option.value)
+                prevSelected.some((item) => item.key === option.key)
+                    ? prevSelected.filter((item) => item.key !== option.key)
                     : [...prevSelected, option]
             );
             onChange && onChange(selectedOptions);
@@ -39,7 +39,7 @@ const Select = ({ id, placeholder = "Select...", options, isMulti = false, isSea
     };
 
     const removeOption = (option: Option) => {
-        return (selectedOptions as Option[]).filter((o) => o.value !== option.value);
+        return (selectedOptions as Option[]).filter((o) => o.key !== option.key);
     };
 
     const onTagRemove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, option: Option) => {
@@ -49,7 +49,7 @@ const Select = ({ id, placeholder = "Select...", options, isMulti = false, isSea
     };
 
     const filteredOptions = options.filter((option: Option) =>
-        option.label.toLowerCase().includes(search.toLowerCase())
+        option.value.toLowerCase().includes(search.toLowerCase())
     );
 
     const customWidth: React.CSSProperties = {
@@ -58,7 +58,7 @@ const Select = ({ id, placeholder = "Select...", options, isMulti = false, isSea
     }
 
     return (
-        <div className={sx['select']} id={id} style={customWidth} data-open={showOptions} data-theme={theme} data-surface={surface} ref={wrapperRef} onChange={onChange}>
+        <div className={sx['select']} id={id} style={customWidth} data-open={showOptions} data-shade={shade} data-size={size} ref={wrapperRef} onChange={onChange}>
             <div className={sx['select-current']} onClick={() => {
                 setShowOptions(!showOptions);
                 searchRef.current?.focus();
@@ -69,12 +69,12 @@ const Select = ({ id, placeholder = "Select...", options, isMulti = false, isSea
                             <div className={sx['select-current_tags']}>
                                 {
                                     selectedOptions.map((option) => (
-                                        <Chip key={option.value} size="small" theme={theme} onClose={(e) => onTagRemove(e, option)}>{option.label}</Chip>
+                                        <Chip key={option.key} size="S" onClose={(e) => onTagRemove(e, option)}>{option.value}</Chip>
                                     )) || { placeholder }
                                 }
                                 {selectedOptions.length === 0 && <span>{placeholder}</span>}
                             </div>
-                        ) : selectedOptions.length > 0 ? selectedOptions.map((option) => option.label) : <span>{placeholder}</span>
+                        ) : selectedOptions.length > 0 ? selectedOptions.map((option) => option.value) : <span>{placeholder}</span>
 
 
                     }
@@ -87,17 +87,17 @@ const Select = ({ id, placeholder = "Select...", options, isMulti = false, isSea
                 <div className={sx['select-dropdown']}>
                     {isSearchable && (
                         <div className={sx['select-dropdown_search']}>
-                            <Input type="text" name="search" size="small" placeholder="Search..." value={search} innerRef={searchRef} onChange={handleSearchChange} />
+                            <Input id="select-search-input" type="text" name="search" size={size} placeholder="Search..." value={search} innerRef={searchRef} onChange={handleSearchChange} />
                         </div>
                     )}
                     <div className={sx["select-dropdown_options"]}>
                         {
                             filteredOptions.length > 0 ? (
                                 filteredOptions.map((option: Option) => {
-                                    const isSelected = selectedOptions.some((selected) => selected.value === option.value)
+                                    const isSelected = selectedOptions.some((selected) => selected.key === option.key)
                                     return (
-                                        <div onClick={() => handleOptionClick(option)} key={option.value} className={sx['select-dropdown_option']} data-selected={isSelected}>
-                                            {option.label}
+                                        <div onClick={() => handleOptionClick(option)} key={option.key} className={sx['select-dropdown_option']} data-selected={isSelected}>
+                                            {option.value}
                                         </div>
                                     )
                                 })

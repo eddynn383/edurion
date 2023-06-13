@@ -4,9 +4,39 @@ import { IPropsButton } from "./interface";
 import sx from "@/styles/component.module.scss";
 
 
-const Button = ({ id, value, size = "medium", theme = "light", variant = "solid", status = "accent", surface = "1", content = "text", type = "button", title, disabled, style, onClick, children }: IPropsButton) => {
+const Button = ({ id, value, size = "M", mode = "primary", status = "accent", variant = "solid", shade = "100", content = "text", selected, type = "button", title, disabled, style, controls, onClick, children }: IPropsButton) => {
+
+
+    const defaultAttrs = {
+        className: sx["button"],
+        id,
+        type,
+        title,
+        disabled,
+        value,
+        style
+    }
+
+    const customAttrs = {
+        "data-mode": mode,
+        "data-variant": variant,
+        "data-status": status,
+        "data-shade": shade,
+        "data-size": size,
+        "data-content": content,
+        "data-selected": selected
+    }
+
+    const a11y = {
+        "aria-controls": controls,
+    }
+
+    const events = {
+        onClick
+    }
+
     return (
-        <button className={sx.button} id={id} value={value} type={type} title={title} disabled={disabled} style={style} onClick={onClick} data-theme={theme} data-variant={variant} data-size={size} data-status={status} data-surface={surface} data-content={content}  >
+        <button {...defaultAttrs} {...customAttrs} {...a11y} {...events} >
             {children ? children : value}
         </button>
     )

@@ -20,47 +20,48 @@ interface AuthProps {
 
 declare module 'next-auth' {
     interface User {
-        id: string
-        name: string
-        email: string
-        image: string
-        roles: string[]
+        id: string;
+        name: string;
+        email: string;
+        image: string;
+        imageLarge: string;
+        roles: string[];
     }
 
     interface Session {
-        user: User
+        user: User;
     }
 }
 
-export function Providers({ children, session, page }: any) {
+export function Providers({ children, session }: any) {
     library.add(fas)
     const { resolvedTheme: theme } = useTheme()
     console.log("THEME:", theme)
     return (
-        <ThemeProvider enableSystem={true}>
-            <SessionProvider session={session}>
-                {/* <Auth roles={roles} loading={loading} unauthorized={unauthorized}> */}
-                {children}
-                {/* </Auth> */}
-            </SessionProvider>
-        </ThemeProvider>
+        // <ThemeProvider enableSystem={true}>
+        <SessionProvider session={session}>
+            {/* <Auth roles={roles} loading={loading} unauthorized={unauthorized}> */}
+            {children}
+            {/* </Auth> */}
+        </SessionProvider>
+        // </ThemeProvider>
     )
 }
 
-function Auth({ children, roles, loading, unauthorized }: AuthProps) {
-    // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
-    const { data: session, status } = useSession({ required: true })
-    const userRole: any = session?.user?.roles
-    const router = useRouter()
+// function Auth({ children, roles, loading, unauthorized }: AuthProps) {
+//     // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
+//     const { data: session, status } = useSession({ required: true })
+//     const userRole: any = session?.user?.roles
+//     const router = useRouter()
 
-    if (status === "loading") {
-        return loading
-    }
+//     if (status === "loading") {
+//         return loading
+//     }
 
-    if (!roles?.some((role: string) => userRole.includes(role))) {
-        router.push(unauthorized)
-        return
-    }
+//     if (!roles?.some((role: string) => userRole.includes(role))) {
+//         router.push(unauthorized)
+//         return
+//     }
 
-    return children
-}
+//     return children
+// }

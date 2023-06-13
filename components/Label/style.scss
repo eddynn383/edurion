@@ -1,10 +1,22 @@
 .label {
-    font-size: 14px;
-    font-weight: 600;
-    &[data-theme="light"] {
-        color: var(--label-light-text-color, var(--text-color-200, #363636));
+    &[data-size="S"] {
+        font-size: 14px;
+        font-weight: 600;
     }
-    &[data-theme="dark"] {
-        color: var(--label-dark-text-color, var(--text-color-800, #E5E5E5));
+    &[data-size="M"] {
+        font-size: 16px;
+        font-weight: 600;
     }
+    &[data-size="L"] {
+        font-size: 18px;
+        font-weight: 400;
+    }
+}
+
+[data-theme="light"] .label {
+    color: var(--label-light-text-color, var(--text-color-200, #363636));
+}
+
+[data-theme="dark"] .label {
+    color: var(--label-dark-text-color, var(--text-color-800, #E5E5E5));
 }

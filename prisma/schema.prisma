@@ -45,6 +45,7 @@ model User {
     emailVerified          DateTime?
     password               String?
     image                  String?
+    imageLarge             String?
     roles                  Roles[]          @default([LEARNER])
     accounts               Account[]
     sessions               Session[]
@@ -55,11 +56,36 @@ model User {
     navigationItemsUpdated NavigationItem[] @relation("UpdatedById")
     coursesInstructed      Course[]         @relation("Instructor")
     coursesEnrolled        Enrollment[]
-    themeId                String?          @db.ObjectId
-    theme                  Theme?           @relation(fields: [themeId], references: [id])
+    userPreferences        UserPreferences?
 
     @@unique([email, image])
     @@map("Users")
+}
+
+model UserPreferences {
+    id             String    @id @default(auto()) @map("_id") @db.ObjectId
+    paymentMethods String?
+    user           User      @relation(fields: [userId], references: [id])
+    userId         String    @unique @db.ObjectId
+    themeMode      ThemeType @default(light)
+    theme          Theme?
+}
+
+model Theme {
+    id                String          @id @default(auto()) @map("_id") @db.ObjectId
+    defaultStyle      Json
+    customStyleId     String?         @db.ObjectId
+    customStyles      CustomStyles[]
+    userPreferencesId String          @unique @db.ObjectId
+    userPreferences   UserPreferences @relation(fields: [userPreferencesId], references: [id])
+}
+
+model CustomStyles {
+    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    lightStyles String[]
+    darkStyles  String[]
+    themeId     String   @unique @db.ObjectId
+    theme       Theme    @relation(fields: [themeId], references: [id])
 }
 
 model Profile {
@@ -67,14 +93,15 @@ model Profile {
     user      User     @relation(fields: [userEmail, avatar], references: [email, image])
     userEmail String   @unique
     avatar    String
-    firstname String
-    lastname  String
-    birthdate String
-    country   String
-    city      String
-    address   String
-    company   String
-    title     String
+    firstname String?
+    lastname  String?
+    bio       String?
+    birthdate String?
+    country   String?
+    city      String?
+    address   String?
+    company   String?
+    title     String?
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
@@ -124,7 +151,7 @@ model Course {
     startDate    DateTime
     endDate      DateTime?
     students     Enrollment[]
-    instructor   User         @relation("Instructor", fields: [instructorId], references: [id])
+    instructor   User?        @relation("Instructor", fields: [instructorId], references: [id])
     instructorId String       @db.ObjectId
     createdAt    DateTime     @default(now())
     updatedAt    DateTime     @updatedAt
@@ -161,16 +188,6 @@ model Enrollment {
     @@map("Enrollments")
 }
 
-model Theme {
-    id     String    @id @default(auto()) @map("_id") @db.ObjectId
-    type   ThemeType @default(LIGHT)
-    style  String[]
-    user   User[]
-    userId String    @db.ObjectId
-
-    @@map("Themes")
-}
-
 enum Roles {
     LEARNER
     TUTOR
@@ -197,6 +214,6 @@ enum CourseStatus {
 }
 
 enum ThemeType {
-    LIGHT
-    DARK
+    light
+    dark
 }

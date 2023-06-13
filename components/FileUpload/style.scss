@@ -1,0 +1,165 @@
+.dropzone {
+    position: relative;
+    border-radius: 8px;
+    padding: var(--dropzone-padding, var(--padding-400, 16px));
+    &-inner,
+    &-file {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-400, 16px);
+    }
+    
+    &-placeholder {
+        display: flex;
+        align-items: center;
+        gap: var(--gap-300, 12px);
+    }
+
+    &-file-details {
+        display: grid;
+        grid-template-columns: min-content auto 44px;
+        gap: var(--gap-300, 12px);
+    }
+    // &[data-selected="true"] &-inner {
+    //     display: grid;
+    //     grid-template-columns: 140px auto min-content;
+    // }
+
+    &-icon,
+    &-file-icon {
+        display: flex;
+        width: 44px;
+        height: 44px;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        background-color: var(--dropzone-icon-background, var(--background-color-150, #F0F2F4));
+        color: var(--dropzone-icon-text-color, var(--text-color-400, #616161));
+        padding: var(--dropone-icon-padding, var(--padding-250, 10px));
+        border-radius: var(--dropone-icon-border-radius, var(--border-radius-100, 4px));
+        transition: all .3s ease-in-out;
+        .icon {
+            font-size: 14px;
+            color: inherit;
+        }
+    }
+
+    &-input {
+        border: 0;
+        clip: rect(0, 0, 0, 0);
+        height: 1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute !important;
+        white-space: nowrap;
+        width: 1px;
+    }
+
+    &-message {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-100, 4px);
+        &-link {
+            font-weight: 500;
+            color: var(--dropzone-message-link-default, var(--accent-color-400, #1C6BBA));
+            cursor: pointer;
+            &:hover {
+                color: var(--dropzone-message-link-hover, var(--accent-color-500, #165695));
+            }
+        }
+    }
+    &-preview {
+        object-fit: cover;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+        border-radius: var(--dropzone-preview-border-radius, var(--border-radius-100, 4px));
+    }
+    &-hint,
+    &-file-size {
+        font-size: var(--dropzone-hint-font-size, var(--font-size-300, 14px));
+        color: #959595
+    }
+}
+
+.active {
+    border: dashed 3px dodgerblue;
+}
+
+.uploadMessage h3 {
+    margin-top: 1rem;
+}
+
+.files {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.files + label {
+    margin-top: 1rem;
+    background-color: #0d6efd;
+    border-radius: 4rem;
+    color: #fff;
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+}
+
+.files + label:focus,
+.files + label:hover {
+    background-color: #0a58ca; 
+    color: #fff;
+}
+
+.files + label:focus {
+    outline: 1px dotted #fff;
+}
+
+.uploadBtn {
+    width: auto;
+    color: white;
+    text-transform: uppercase;
+    margin: 2rem;
+    background-color: #0d6efd;
+    border-radius: 4rem;
+    padding: 0.75rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+[data-theme="light"] .dropzone {
+    transition: all 0.3s ease-in-out;
+
+    &[data-status="default"][data-focus="true"] {
+        background-color: var(--dropzone-light-background-color-focus, #e8f3ff);
+        .dropzone-icon {
+            background-color: var(--dropzone-icon-background-focus, var(--accent-color-400, #1C6BBA));
+            .icon {
+                color: var(--dropzone-icon-background-focus, var(--text-color-950, #ffffff));
+            }
+        }
+        .dropzone-hint {
+            color: var(--dropzone-hint-text-color-focus, var(--text-color-400, #E5E5E5));
+        }
+    }
+    &[data-status="success"] {
+        background-image: repeating-linear-gradient(0deg, var(--dropzone-light-border-color-success, var(--success-color-400, #4CB963)), var(--dropzone-light-border-color-success, var(--success-color-400, #4CB963)) 9px, transparent 9px, transparent 16px, var(--dropzone-light-border-color-success, var(--success-color-400, #4CB963)) 16px), repeating-linear-gradient(90deg, var(--dropzone-light-border-color-success, var(--success-color-400, #4CB963)), var(--dropzone-light-border-color-success, var(--success-color-400, #4CB963)) 9px, transparent 9px, transparent 16px, var(--dropzone-light-border-color-success, var(--success-color-400, #4CB963)) 16px), repeating-linear-gradient(180deg, var(--dropzone-light-border-color-success, var(--success-color-400, #4CB963)), var(--dropzone-light-border-color-success, var(--success-color-400, #4CB963)) 9px, transparent 9px, transparent 16px, var(--dropzone-light-border-color-success, var(--success-color-400, #4CB963)) 16px), repeating-linear-gradient(270deg, var(--dropzone-light-border-color-success, var(--success-color-400, #4CB963)), var(--dropzone-light-border-color-success, var(--success-color-400, #4CB963)) 9px, transparent 9px, transparent 16px, var(--dropzone-light-border-color-success, var(--success-color-400, #4CB963)) 16px);
+        background-color: var(--dropzone-light-background-color-success, var(--success-color-100, #C9EAD0));
+    
+    }
+}
+
+[data-theme="dark"] .dropzone {
+    background-image: repeating-linear-gradient(0deg, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)), var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 9px, transparent 9px, transparent 16px, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 16px), repeating-linear-gradient(90deg, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)), var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 9px, transparent 9px, transparent 16px, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 16px), repeating-linear-gradient(180deg, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)), var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 9px, transparent 9px, transparent 16px, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 16px), repeating-linear-gradient(270deg, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)), var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 9px, transparent 9px, transparent 16px, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 16px);
+    background-size: 1px 100%, 100% 1px, 1px 100% , 100% 1px;
+    background-position: 0 0, 0 0, 100% 0, 0 100%;
+    background-repeat: no-repeat;
+}

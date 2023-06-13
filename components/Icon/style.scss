@@ -1,9 +1,6 @@
-.icon {
-    &[data-status="default"][data-theme="light"] {
+[data-theme="light"] .icon {
+    &[data-status="default"] {
         color: var(--icon-default, var(--text-color-100, #181818))
-    }
-    &[data-status="default"][data-theme="dark"] {
-        color: var(--icon-default, var(--text-color-950, #ffffff))
     }
 
     &[data-status="success"] {
@@ -20,5 +17,11 @@
 
     &[data-status="info"] {
         color: var(--icon-info, var(--info-color-400, #58C4CE))
+    }
+}
+
+[data-theme="dark"] .icon {
+    &[data-status="default"] {
+        color: var(--icon-default, var(--text-color-950, #ffffff))
     }
 }

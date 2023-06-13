@@ -10,13 +10,13 @@ import Label from "@/components/Label";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import sx from "../../styles/component.module.scss"
 
-const ManagementDrawer = ({theme="light", session, state, action="add", data, selectedItemId, getNavigationData, onStateUpdate}:any) => {
-    
-    const [ title, setTitle ] = useState<string>("");
-    const [ url, setUrl ] = useState<string>("");
-    const [ icon, setIcon ] = useState<string>("");
-    const [ errorMsg, setErrorMsg ] = useState<string>("");
-    const [ showError, setShowError ] = useState<boolean>(false);
+const ManagementDrawer = ({ theme = "light", session, state, action = "add", data, selectedItemId, getNavigationData, onStateUpdate }: any) => {
+
+    const [title, setTitle] = useState<string>("");
+    const [url, setUrl] = useState<string>("");
+    const [icon, setIcon] = useState<string>("");
+    const [errorMsg, setErrorMsg] = useState<string>("");
+    const [showError, setShowError] = useState<boolean>(false);
 
     useEffect(() => {
         console.log(action)
@@ -60,10 +60,10 @@ const ManagementDrawer = ({theme="light", session, state, action="add", data, se
                     Accept: "application/json",
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ title, url, icon, createdById: userID, updatedById: userID, allowedUsers: [userID], parentId: selectedItemId} )
+                body: JSON.stringify({ title, url, icon, createdById: userID, updatedById: userID, allowedUsers: [userID], parentId: selectedItemId })
             }).then(async () => {
                 console.log("The navigation entry was successfully registred!");
-                getNavigationData() 
+                getNavigationData()
                 onStateUpdate('close')
 
                 setTitle("")
@@ -74,7 +74,7 @@ const ManagementDrawer = ({theme="light", session, state, action="add", data, se
             });
         } else if (action === 'edit') {
             console.log("after edit")
-            if (selectedItemId) {  
+            if (selectedItemId) {
                 console.log(selectedItemId)
                 const response = await fetch(`/api/navigation?id=${selectedItemId}`, {
                     method: 'PUT',
@@ -83,7 +83,7 @@ const ManagementDrawer = ({theme="light", session, state, action="add", data, se
                         Accept: "application/json",
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ title, url, icon, updatedById: userID})
+                    body: JSON.stringify({ title, url, icon, updatedById: userID })
                 }).then(async () => {
                     console.log("The navigation entry was successfully edited!");
                     getNavigationData()
@@ -105,15 +105,15 @@ const ManagementDrawer = ({theme="light", session, state, action="add", data, se
     }
 
     const alert = (
-        <Alert status="fail" variant="standard" action={<Button type="button" size="xsmall" variant="text" status="fail" content="icon" onClick={() => setShowError(false)} theme={theme}><FontAwesomeIcon icon="close" /></Button>}>
+        <Alert status="fail" variant="standard" action={<Button type="button" mode="secondary" variant="outline" status="fail" size="XS" content="icon" onClick={() => setShowError(false)}><FontAwesomeIcon icon="close" /></Button>}>
             <Alert.Title>Error</Alert.Title>
             <Alert.Description>{errorMsg}</Alert.Description>
         </Alert>
     )
 
     return (
-        <Drawer state={state} onClickOutside={() => onStateUpdate("close")} theme={theme} width="500px" > 
-            {<Form onSubmit={saveHandler} style={{"height": "100%", "gap": "0"}}>  
+        <Drawer state={state} onClickOutside={() => onStateUpdate("close")} theme={theme} width="500px" >
+            {<Form onSubmit={saveHandler} style={{ "height": "100%", "gap": "0" }}>
                 <Drawer.Header>
                     {action === 'add' ? (
                         <div className={sx["drawer-header-inner"]}>
@@ -126,30 +126,30 @@ const ManagementDrawer = ({theme="light", session, state, action="add", data, se
                             <span className={sx["drawer-header-subheading"]}>Change the form values below</span>
                         </div>
                     )}
-                    <Button type="button" size="xsmall" theme={theme} variant="neutral" status="neutral" surface="1" content="icon" onClick={() => onStateUpdate("close")} >
+                    <Button type="button" mode="secondary" variant="solid" status="accent" shade="100" size="XS" content="icon" onClick={() => onStateUpdate("close")} >
                         <FontAwesomeIcon icon="close" />
                     </Button>
                 </Drawer.Header>
-                <Drawer.Body>  
+                <Drawer.Body>
                     {
                         showError && alert
                     }
                     <InputGroup>
                         <Label htmlFor="title">Title</Label>
-                        <Input id="title" name="title" placeholder="Title" type="text" value={title} onChange={(e:any) => {setTitle(e.target.value)}} />
+                        <Input id="title" name="title" placeholder="Title" type="text" value={title} onChange={(e: any) => { setTitle(e.target.value) }} />
                     </InputGroup>
                     <InputGroup>
                         <Label htmlFor="url">Url</Label>
-                        <Input id="url" name="url" placeholder="Url" type="text" value={url} onChange={(e:any) => {setUrl(e.target.value)}} />
+                        <Input id="url" name="url" placeholder="Url" type="text" value={url} onChange={(e: any) => { setUrl(e.target.value) }} />
                     </InputGroup>
                     <InputGroup>
                         <Label htmlFor="icon">Icon</Label>
-                        <Input id="icon" name="icon" placeholder="Icon" type="text" value={icon} onChange={(e:any) => {setIcon(e.target.value)}} />
+                        <Input id="icon" name="icon" placeholder="Icon" type="text" value={icon} onChange={(e: any) => { setIcon(e.target.value) }} />
                     </InputGroup>
                 </Drawer.Body>
                 <Drawer.Footer>
-                    <Button type="submit" size="small" theme={theme} variant="solid" status="accent" content="text" >Save</Button>
-                    <Button type="button" size="small" theme={theme} variant="neutral" status="neutral" surface="2" content="text" onClick={handleCancelClick}>Cancel</Button>
+                    <Button type="submit" mode="primary" variant="solid" status="accent" size="S" content="text" >Save</Button>
+                    <Button type="button" mode="secondary" variant="outline" status="accent" shade="150" size="S" content="text" onClick={handleCancelClick}>Cancel</Button>
                 </Drawer.Footer>
             </Form>}
         </Drawer>

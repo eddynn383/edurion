@@ -1,0 +1,124 @@
+.dropzone {
+    border-radius: 8px;
+    padding: var(--dropzone-padding, var(--padding-400, 16px));
+    &-inner {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &-icon {
+        width: 36px;
+        height: 36px;
+        text-align: center;
+        background-color: var(--dropzone-icon-background, var(--background-color-150, #F0F2F4));
+        padding: var(--dropone-icon-padding, var(--padding-250, 10px));
+        border-radius: var(--dropone-icon-border-radius, var(--border-radius-100, 4px));
+        .icon {
+            font-size: 14px;
+        }
+    }
+
+    &-input {
+        border: 0;
+        clip: rect(0, 0, 0, 0);
+        height: 1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute !important;
+        white-space: nowrap;
+        width: 1px;
+    }
+
+    &-message {
+        display: flex;
+        flex-direction: column;
+        &-link {
+            font-weight: 500;
+            color: var(--dropzone-message-link-default, var(--accent-color-400, #1C6BBA));
+            cursor: pointer;
+            &:hover {
+                color: var(--dropzone-message-link-hover, var(--accent-color-500, #165695));
+            }
+        }
+    }
+    &-preview {
+        object-fit: cover;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+    
+    &-hint {
+        font-size: var(--dropzone-hint-font-size, var(--font-size-300, 14px));
+        color: #959595
+    }
+}
+
+.active {
+    border: dashed 3px dodgerblue;
+}
+
+.uploadMessage h3 {
+    margin-top: 1rem;
+}
+
+.files {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.files + label {
+    margin-top: 1rem;
+    background-color: #0d6efd;
+    border-radius: 4rem;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    text-align: center;
+    user-select: none;
+}
+
+.files + label:focus,
+.files + label:hover {
+    background-color: #0a58ca; 
+    color: #fff;
+}
+
+.files + label:focus {
+    outline: 1px dotted #fff;
+}
+
+.uploadBtn {
+    width: auto;
+    color: white;
+    text-transform: uppercase;
+    margin: 2rem;
+    background-color: #0d6efd;
+    border-radius: 4rem;
+    cursor: pointer;
+    padding: 0.75rem;
+    text-align: center;
+}
+
+[data-theme="light"] .dropzone {
+    background-image: repeating-linear-gradient(0deg, var(--dropzone-light-border-color, var(--border-color-300, #C4CCD0)), var(--dropzone-light-border-color, var(--border-color-300, #C4CCD0)) 9px, transparent 9px, transparent 16px, var(--dropzone-light-border-color, var(--border-color-300, #C4CCD0)) 16px), repeating-linear-gradient(90deg, var(--dropzone-light-border-color, var(--border-color-300, #C4CCD0)), var(--dropzone-light-border-color, var(--border-color-300, #C4CCD0)) 9px, transparent 9px, transparent 16px, var(--dropzone-light-border-color, var(--border-color-300, #C4CCD0)) 16px), repeating-linear-gradient(180deg, var(--dropzone-light-border-color, var(--border-color-300, #C4CCD0)), var(--dropzone-light-border-color, var(--border-color-300, #C4CCD0)) 9px, transparent 9px, transparent 16px, var(--dropzone-light-border-color, var(--border-color-300, #C4CCD0)) 16px), repeating-linear-gradient(270deg, var(--dropzone-light-border-color, var(--border-color-300, #C4CCD0)), var(--dropzone-light-border-color, var(--border-color-300, #C4CCD0)) 9px, transparent 9px, transparent 16px, var(--dropzone-light-border-color, var(--border-color-300, #C4CCD0)) 16px);
+    background-size: 1px 100%, 100% 1px, 1px 100% , 100% 1px;
+    background-position: 0 0, 0 0, 100% 0, 0 100%;
+    background-repeat: no-repeat;
+}
+
+[data-theme="dark"] .dropzone {
+    background-image: repeating-linear-gradient(0deg, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)), var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 9px, transparent 9px, transparent 16px, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 16px), repeating-linear-gradient(90deg, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)), var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 9px, transparent 9px, transparent 16px, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 16px), repeating-linear-gradient(180deg, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)), var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 9px, transparent 9px, transparent 16px, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 16px), repeating-linear-gradient(270deg, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)), var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 9px, transparent 9px, transparent 16px, var(--dropzone-dark-border-color, var(--border-color-300, #C4CCD0)) 16px);
+    background-size: 1px 100%, 100% 1px, 1px 100% , 100% 1px;
+    background-position: 0 0, 0 0, 100% 0, 0 100%;
+    background-repeat: no-repeat;
+}

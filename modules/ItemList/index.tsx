@@ -30,23 +30,23 @@ const ItemList = ({ data, onSelectAll, onToggleSelect, allSelected, indeterminat
     console.log(data)
 
     const findTile = useCallback((id: string) => {
-            const tile = tiles.filter((item: any) => item.id === id)[0];
-            return {
-                tile,
-                index: tiles.indexOf(tile),
-            };
-        },
+        const tile = tiles.filter((item: any) => item.id === id)[0];
+        return {
+            tile,
+            index: tiles.indexOf(tile),
+        };
+    },
         [tiles]
     );
 
     const moveTile = useCallback((id: string, atIndex: any) => {
         const { tile, index } = findTile(id);
         setTiles(update(tiles, {
-                $splice: [
-                    [index, 1],
-                    [atIndex, 0, tile],
-                ],
-            })
+            $splice: [
+                [index, 1],
+                [atIndex, 0, tile],
+            ],
+        })
         );
     },
         [findTile, tiles, setTiles]
@@ -61,9 +61,9 @@ const ItemList = ({ data, onSelectAll, onToggleSelect, allSelected, indeterminat
     };
 
     return (
-        <div className={sx["list"]}> 
+        <div className={sx["list"]}>
             <div className={sx["list-select-all"]}>
-                <Checkbox checked={allSelected} indeterminate={indeterminate} onChange={handleSelectAll} />
+                <Checkbox checked={allSelected} indeterminate={indeterminate} onChange={handleSelectAll} id="list-select-all-checkbox" />
             </div>
             <div className={sx["list-items"]}>
                 <DndProvider backend={HTML5Backend}>

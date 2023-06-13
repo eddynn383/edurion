@@ -12,23 +12,23 @@ const PageHead = ({ theme }: any) => {
         <div className={sx["head"]} data-theme={theme}>
             <div className={sx["head-inner"]}>
                 <div className={sx["head-left"]}>
-                    <PageTitle theme={theme} />
+                    <PageTitle />
                 </div>
                 <div className={sx["head-right"]}>
-                    <Button type="button" size="medium" variant="solid" status="accent" content="text" theme={theme}>Create</Button>
-                    <Button type="button" size="medium" variant="neutral" status="neutral" surface="2" content="icon" theme={theme}>
+                    <Button type="button" mode="primary" variant="solid" status="accent" size="M" content="text" >Create</Button>
+                    <Button type="button" mode="secondary" variant="solid" status="accent" shade="150" size="M" content="icon" >
                         <>
                             <Icon value="comment" theme={theme} />
-                            <Badge value={55} max={50} theme={theme} size="medium" />
+                            <Badge value={55} max={50} size="medium" />
                         </>
                     </Button>
-                    <Button type="button" size="medium" variant="neutral" status="neutral" surface="2" content="icon" theme={theme} >
+                    <Button type="button" mode="secondary" variant="solid" status="accent" shade="150" size="M" content="icon" >
                         <>
-                            <Icon value="bell" theme={theme} />
-                            <Badge value={1} theme={theme} size="small" />
+                            <Icon value="bell" />
+                            <Badge value={1} size="small" />
                         </>
                     </Button>
-                    <Profile id="profile-1" theme={theme} size="medium" />
+                    <Profile id="profile-1" size="M" />
                 </div>
             </div>
         </div>

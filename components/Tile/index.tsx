@@ -41,7 +41,7 @@ const Tile = ({ id, title, url, icon, onMoveTile, onToggleSelect, selected, find
     return (
         <li style={{ opacity: isDragging ? 0.5 : 1 }} className={sx["list-item"]} ref={(node) => drag(drop(node))}>
             <span className={sx["list-item-id"]}>
-                <Checkbox checked={selected || false} indeterminate={false} onChange={handleSelect} />
+                <Checkbox checked={selected || false} indeterminate={false} onChange={handleSelect} id="list-checkbox" />
             </span>
             <span className={sx["list-item-title"]}>{title}</span>
             <span className={sx["list-item-url"]}>{url}</span>

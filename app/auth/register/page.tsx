@@ -17,9 +17,9 @@ export default function Register() {
     const router = useRouter()
     const [isSuccess, setIsSuccess] = useState(false)
 
-    if (session) {
-        redirect("/dashboard/0001")
-    }
+    // if (session) {
+    //     redirect("/dashboard/0001")
+    // }
 
     const submitHandler = async (email: string, password: string) => {
         const response = await fetch('/api/register', {
@@ -48,7 +48,7 @@ export default function Register() {
                 <p className={sx["description"]}>Welcome! Please enter your details.</p>
             </div>
             {/* <ProgressRadial size={40} progress={90} trackWidth={4} indicatorWidth={4} indicatorCap="square" /> */}
-            <RegisterForm cn={sx["register_form"]} theme={theme} onSubmit={submitHandler} onSuccess={isSuccess} />
+            <RegisterForm cn={sx["register_form"]} onSubmit={submitHandler} onSuccess={isSuccess} />
         </div>
     )
 }

@@ -1,9 +1,8 @@
 "use client"
 
 import Avatar from "@/components/Avatar";
-import Image from "next/image";
-
-const theme = "dark"
+import Button from "@/components/Button";
+import Icon from "@/components/Icon";
 
 const header = [
     {
@@ -14,7 +13,7 @@ const header = [
         },
         render: (item: any) => (
             <div style={{ "display": "flex", "gap": "8px", "alignItems": "center" }}>
-                <Avatar src={item.image} alt={item.title} theme={theme} size="medium" type="square" />
+                <Avatar src={item.image} alt={item.title} size="M" type="square" />
                 <span>{item.title}</span>
             </div>
         )
@@ -50,6 +49,30 @@ const header = [
         title: "Status",
         key: "status"
     },
+    {
+        title: '',
+        dataIndex: '',
+        key: 'x',
+        render: (data: { id: any; }) => (
+            <div style={{ "display": "flex", "gap": "8px" }}>
+                <Button type="button" title="Delete this navigation entry" mode="secondary" variant="solid" status="fail" shade="150" size="S" content="icon"
+                // onClick={() => onDelete(data.id)}
+                >
+                    <Icon value="trash" />
+                </Button>
+                <Button type="button" title="Edit this navigation entry" mode="secondary" variant="solid" status="warning" shade="150" size="S" content="icon"
+                // onClick={() => onEdit(data.id)}
+                >
+                    <Icon value="edit" />
+                </Button>
+                <Button type="button" title="Add children for this navigation entry" mode="secondary" variant="solid" status="info" shade="150" size="S" content="icon"
+                // onClick={() => onAdd(data.id)}
+                >
+                    <Icon value="clone" />
+                </Button>
+            </div>
+        )
+    }
 ]
 
 export default header

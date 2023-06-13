@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { IPropsCheckbox } from "./interface";
 import sx from "@/styles/component.module.scss"
 
-const Checkbox = ({ children, theme = "light", size = "medium", checked, indeterminate, onChange }: IPropsCheckbox) => {
+const Checkbox = ({ id, children, size = "M", checked, indeterminate, onChange }: IPropsCheckbox) => {
     const checkboxRef = useRef<HTMLInputElement>(null);
     const [isFocused, setIsFocused] = useState(false);
 
@@ -29,10 +29,10 @@ const Checkbox = ({ children, theme = "light", size = "medium", checked, indeter
     }
 
     return (
-        <label htmlFor="checkbox" className={sx["checkbox"]} data-theme={theme} data-size={size} data-focus={isFocused}>
-            <input id="checkbox" className={sx["checkbox_input"]} type="checkbox" ref={checkboxRef} checked={checked} data-state={checked ? "checked" : indeterminate ? "indeterminate" : "unchecked"} onChange={onChange} onFocus={() => onFocusHandler()} onBlur={() => onBlurHandler()} />
+        <label htmlFor={`checkbox-${id}`} className={sx["checkbox"]} data-size={size} data-focus={isFocused} data-selected={checked}>
+            <input id={`checkbox-${id}`} className={sx["checkbox_input"]} type="checkbox" ref={checkboxRef} checked={checked} data-state={checked ? "checked" : indeterminate ? "indeterminate" : "unchecked"} onChange={onChange} onFocus={() => onFocusHandler()} onBlur={() => onBlurHandler()} />
             <span className={sx["checkbox_checkmark"]}></span>
-            <span className={sx["checkbox_text"]}>{children}</span>
+            {children && <span className={sx["checkbox_text"]}>{children}</span>}
         </label>
     )
 }

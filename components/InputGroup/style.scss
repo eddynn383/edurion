@@ -1,5 +1,16 @@
 .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--input-group-gap, var(--gap-100, 4px));
+    display: grid;
+    
+
+    &[data-layout="one"] {
+        grid-auto-flow: row;
+        grid-template-rows: min-content min-content;
+        gap: var(--input-group-gap, var(--gap-100, 4px));
+    }
+
+    &[data-layout="two"] {
+        grid-auto-flow: column;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--input-group-gap, var(--gap-400, 16px));
+    }
 }

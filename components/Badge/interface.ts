@@ -6,8 +6,7 @@ export interface IPropsBadge {
     title?: string,
     style?: React.CSSProperties,
     max?: number,
-    theme: Theme,
     size: "small" | "medium" | "large",
-    status?: Status,
+    status?: "accent" | Status,
     children?: React.ReactElement | string
 }

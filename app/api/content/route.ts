@@ -1,4 +1,4 @@
-import prisma from "@/lib/prismadb";
+import { prisma } from "@/lib/prismadb";
 import { NextResponse } from 'next/server';
 
 export const GET = async (request: Request) => {
@@ -8,7 +8,7 @@ export const GET = async (request: Request) => {
         return NextResponse.json({ entry })
     } catch (error: any) {
         console.log(error)
-        return new Response(error, { status: 500 });
+        return NextResponse.json({ error }, { status: 500 });
     }
 }
 
@@ -32,7 +32,7 @@ export const POST = async (request: Request) => {
         return NextResponse.json({ newCourse })
     } catch (error: any) {
         console.log(error)
-        return new Response(error, { status: 500 });
+        return NextResponse.json({ error }, { status: 500 });
     }
 }
 

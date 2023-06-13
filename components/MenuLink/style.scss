@@ -12,6 +12,7 @@
     padding-right: var(--menu-link-padding-right, var(--menu-link-padding, var(--padding-300, 12px)));
     transition: all .3s ease-in-out;
     cursor: pointer;
+
 }
 
 [data-theme="light"] .menu-link {
@@ -23,6 +24,9 @@
         border: var(--border-width-100) solid var(--menu-light-link-border-hover, var(--background-color-200, #E1E6E9));
         color: var(--menu-light-link-color-hover, var(--text-color-950, #ffffff));
     }
+    .icon {
+        color: inherit;
+    }
 } 
 
 [data-theme="dark"] .menu-link {
@@ -33,5 +37,8 @@
         background-color: var(--menu-link-background-hover, var(--background-color-850, #343738));
         border: var(--border-width-100) solid var(--menu-link-border-hover, var(--background-color-850, #242424));
         color: var(--menu-link-color-hover, var(--text-color-950, #ffffff));
+    }
+    .icon {
+        color: inherit;
     }
 }

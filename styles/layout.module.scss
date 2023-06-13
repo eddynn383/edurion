@@ -1,6 +1,7 @@
 .auth {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    height: 100vh;
     overflow: hidden;
 
     .left {
@@ -74,17 +75,26 @@
 .main {
     display: grid;
     grid-template-columns: 300px auto;
+    grid-template-rows: 100%;
     overflow: hidden;
+    height: 100vh;
 
     .left {
-        height: 100vh;
-
         .logo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: relative;
+            display: grid;
+            padding: var(--logo-paddig, var(--padding-500, 20px));
             width: 100%;
-            height: 80px;
+            height: 81px;
+            &:before {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 20px;
+                right: 20px;
+                height: 1px;
+                background-color: var(--background-color-150);
+            }
 
             img {
                 width: 140px;
@@ -102,13 +112,13 @@
 
     .right {
         .inner {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: min-content 1fr;
+            grid-template-areas: 
+            "header" 
+            "main";
             height: 100%;
-
-            >* {
-                width: 100%;
-            }
         }
     }
 }

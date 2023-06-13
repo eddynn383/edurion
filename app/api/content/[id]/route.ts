@@ -1,4 +1,4 @@
-import prisma from "@/lib/prismadb";
+import { prisma } from "@/lib/prismadb";
 import { NextResponse } from 'next/server';
 
 interface IPropsParams {
@@ -20,7 +20,7 @@ export const GET = async (request: Request, { params }: IPropsParams) => {
         return NextResponse.json({ entry })
     } catch (error: any) {
         console.log(error)
-        return new Response(error, { status: 500 });
+        return NextResponse.json({ error }, { status: 500 });
     }
 }
 
@@ -39,7 +39,7 @@ export const PUT = async (request: Request, { params }: IPropsParams) => {
         return NextResponse.json({ entry })
     } catch (error: any) {
         console.log(error)
-        return new Response(error, { status: 500 });
+        return NextResponse.json({ error }, { status: 500 });
     }
 }
 
@@ -56,6 +56,6 @@ export const DELETE = async (request: Request, { params }: IPropsParams) => {
         return NextResponse.json({ entry })
     } catch (error: any) {
         console.log(error)
-        return new Response(error, { status: 500 });
+        return NextResponse.json({ error }, { status: 500 });
     }
 }

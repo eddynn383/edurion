@@ -19,7 +19,7 @@ const MenuDropdown = ({ items, parent, show, setShow, depthLevel, theme = "light
                     <NoLink id="back-to" title={parent} iconBefore={<Icon value="chevron-left" theme={theme} />} text={parent} theme={theme} onClick={() => setShow(false)} />
                     {
                         items?.map((item: any, i: React.Key) => (
-                            <MenuItem item={item} key={i} depthLevel={depthLevel} theme={theme} />
+                            <MenuItem item={item} key={i} depthLevel={depthLevel} />
                         ))
                     }
                 </ul>

@@ -1,6 +1,8 @@
 .link {
     position: relative;
-    color: var(--link-color-default, var(--accent-color-400, #1C6BBA));
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: 500;
     &:before {
         content: "";
         position: absolute;
@@ -8,14 +10,87 @@
         transition: all .3s ease;
         z-index: -1;
     }
-    &:hover {
-        color: var(--link-color-hover, var(--accent-color-500, #165695));
-    }
+
     &:focus {
         &:before {
             inset: -4px;
             border: 1px solid var(--accent-color-400, #1C6BBA);
             border-radius: 4px;
+        }
+    }
+}
+
+button.link {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+[data-theme="light"] .link {
+    &[data-status="default"] {
+        color: var(--link-color-default, var(--accent-color-400, #1C6BBA));
+        &:hover {
+            color: var(--link-color-hover, var(--accent-color-500, #165695));
+        }
+    }
+    &[data-status="success"] {
+        color: var(--link-color-default, var(--success-color-400, #4CB963));
+        &:hover {
+            color: var(--link-color-hover, var(--success-color-500, #3D944F));
+        }
+    }
+    &[data-status="fail"] {
+        color: var(--link-color-default, var(--fail-color-400, #BA2D0B));
+        &:hover {
+            color: var(--link-color-hover, var(--fail-color-500, #952409));
+        }
+    }
+    &[data-status="warning"] {
+        color: var(--link-color-default, var(--warning-color-400, #FF9F1C));
+        &:hover {
+            color: var(--link-color-hover, var(--warning-color-500, #CC7F16));
+        }
+    }
+    &[data-status="info"] {
+        color: var(--link-color-default, var(--info-color-400, #58C4CE));
+        &:hover {
+            color: var(--link-color-hover, var(--info-color-500, #469DA5));
+        }
+    }
+}
+
+[data-theme="dark"] .link {
+    &[data-status="default"] {
+        color: var(--link-color-default, var(--accent-color-400, #1C6BBA));
+        &:hover {
+            color: var(--link-color-hover, var(--accent-color-500, #165695));
+        }
+    }
+    &[data-status="success"] {
+        color: var(--link-color-default, var(--success-color-400, #4CB963));
+        &:hover {
+            color: var(--link-color-hover, var(--success-color-500, #3D944F));
+        }
+    }
+    &[data-status="fail"] {
+        color: var(--link-color-default, var(--fail-color-400, #BA2D0B));
+        &:hover {
+            color: var(--link-color-hover, var(--fail-color-500, #952409));
+        }
+    }
+    &[data-status="warning"] {
+        color: var(--link-color-default, var(--warning-color-400, #FF9F1C));
+        &:hover {
+            color: var(--link-color-hover, var(--warning-color-500, #CC7F16));
+        }
+    }
+    &[data-status="info"] {
+        color: var(--link-color-default, var(--info-color-400, #58C4CE));
+        &:hover {
+            color: var(--link-color-hover, var(--info-color-500, #469DA5));
         }
     }
 }

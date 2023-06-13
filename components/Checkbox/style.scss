@@ -31,8 +31,13 @@
         }
     }
 
-    &_input:checked~&_checkmark:after {
+    &_input:checked~&_checkmark:after,
+    &_input[data-state="indeterminate"]~&_checkmark:after {
         display: block;
+    }
+
+    &_input[data-state="indeterminate"]~&_checkmark:after {
+        background-color: var(--background-color-300, #1c6bba);
     }
 
     &_checkmark:after {
@@ -42,68 +47,65 @@
         transform: translate(-50%, -50%);
     }
 
-    &[data-theme="light"] {
+    &[data-size="L"] {
         .checkbox_checkmark {
-            background-color: var(--checkbox-light-outer-background-default, var(--background-color-150, #F0F2F4));
-        }
-
-        &:hover {
-            .checkbox_checkmark {
-                background-color: var(--checkbox-light-outer-background-hover, var(--background-color-200, #F0F2F4));
-            }
-        }
-    }
-
-    &[data-theme="dark"] {
-        .checkbox_checkmark {
-            background-color: var(--checkbox-dark-outer-background-default, var(--background-color-900, #2E2F30));
-        }
-
-        &:hover {
-            .checkbox_checkmark {
-                background-color: var(--checkbox-dark-outer-background-hover, var(--background-color-850, #2E2F30));
-            }
-        }
-    }
-
-    &[data-size="large"] {
-        .checkbox_checkmark {
-            width: var(--checkbox-large-width, var(--size-600, 24px));
-            height: var(--checkbox-large-height, var(--size-600, 24px));
-            border-radius: var(--checkbox-large-border-radius, var(--size-200, 8px));
+            width: var(--checkbox-l-width, var(--size-600, 24px));
+            height: var(--checkbox-l-height, var(--size-600, 24px));
+            border-radius: var(--checkbox-l-border-radius, var(--size-200, 8px));
 
             &:after {
-                width: calc(var(--checkbox-large-width, var(--size-600, 24px)) / 2);
-                height: calc(var(--checkbox-large-height, var(--size-600, 24px)) / 2);
-                border-radius: calc(var(--checkbox-large-border-radius, var(--size-200, 8px)) / 2);
+                width: calc(var(--checkbox-l-width, var(--size-600, 24px)) / 2);
+                height: calc(var(--checkbox-l-height, var(--size-600, 24px)) / 2);
+                border-radius: calc(var(--checkbox-l-border-radius, var(--size-200, 8px)) / 2);
+            }
+        }
+        .checkbox_input[data-state="indeterminate"] {
+            &~.checkbox_checkmark {
+                &:after {
+                    height: 6px;
+                }
             }
         }
     }
 
-    &[data-size="medium"] {
+    &[data-size="M"] {
         .checkbox_checkmark {
-            width: var(--checkbox-medium-width, var(--size-500, 20px));
-            height: var(--checkbox-medium-height, var(--size-500, 20px));
-            border-radius: var(--checkbox-medium-border-radius, var(--size-100, 4px));
+            width: var(--checkbox-m-width, var(--size-500, 20px));
+            height: var(--checkbox-m-height, var(--size-500, 20px));
+            border-radius: var(--checkbox-m-border-radius, var(--size-100, 4px));
 
             &:after {
-                width: calc(var(--checkbox-medium-width, var(--size-500, 20px)) / 2);
-                height: calc(var(--checkbox-medium-height, var(--size-500, 20px)) / 2);
-                border-radius: calc(var(--checkbox-medium-border-radius, var(--size-100, 4px)) / 2);
+                width: calc(var(--checkbox-m-width, var(--size-500, 20px)) / 2);
+                height: calc(var(--checkbox-m-height, var(--size-500, 20px)) / 2);
+                border-radius: calc(var(--checkbox-m-border-radius, var(--size-100, 4px)) / 2);
+            }
+        }
+        .checkbox_input[data-state="indeterminate"] {
+            &~.checkbox_checkmark {
+                &:after {
+                    height: 4px;
+                }
             }
         }
     }
 
-    &[data-size="small"] {
+    &[data-size="S"] {
         .checkbox_checkmark {
-            width: var(--checkbox-small-width, var(--size-400, 16px));
-            height: var(--checkbox-small-height, var(--size-400, 16px));
-            border-radius: var(--checkbox-small-border-radius, var(--size-050, 2px));
+            width: var(--checkbox-s-width, var(--size-400, 16px));
+            height: var(--checkbox-s-height, var(--size-400, 16px));
+            border-radius: var(--checkbox-s-border-radius, var(--size-050, 2px));
 
             &:after {
-                width: calc(var(--checkbox-small-width, var(--size-400, 16px)) / 2);
-                height: calc(var(--checkbox-small-height, var(--size-400, 16px)) / 2);
-                border-radius: calc(var(--checkbox-small-border-radius, var(--size-050, 2px)) / 2);
+                width: calc(var(--checkbox-s-width, var(--size-400, 16px)) / 2);
+                height: calc(var(--checkbox-s-height, var(--size-400, 16px)) / 2);
+                border-radius: calc(var(--checkbox-s-border-radius, var(--size-050, 2px)) / 2);
+            }
+        }
+        .checkbox_input[data-state="indeterminate"] {
+            &~.checkbox_checkmark {
+                &:after {
+                    height: 2px;
+                }
             }
         }
     }
@@ -122,4 +124,28 @@
         }
     }
 
+}
+
+[data-theme="light"] .checkbox {
+    .checkbox_checkmark {
+        background-color: var(--checkbox-light-outer-background-default, var(--background-color-150, #F0F2F4));
+    }
+
+    &:hover {
+        .checkbox_checkmark {
+            background-color: var(--checkbox-light-outer-background-hover, var(--background-color-200, #F0F2F4));
+        }
+    }
+}
+
+[data-theme="dark"] .checkbox {
+    .checkbox_checkmark {
+        background-color: var(--checkbox-dark-outer-background-default, var(--background-color-900, #2E2F30));
+    }
+
+    &:hover {
+        .checkbox_checkmark {
+            background-color: var(--checkbox-dark-outer-background-hover, var(--background-color-850, #2E2F30));
+        }
+    }
 }

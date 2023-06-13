@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react"
 import { ConfigProvider, Table, Switch } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import Button from "@/components/Button";
+import Button from "@/components/ButtonOld";
 import Chip from "@/components/Chip";
 import Link from "next/link";
 import Loading from "@/components/Loading"
@@ -18,20 +18,20 @@ function isTheme(value: string | undefined): value is "light" | "dark" {
     return value === "light" || value === "dark";
 }
 
-const ManagementTable = ({ theme="light", header, body, onAdd, onEdit, onDelete, onSelectedRowKeysChange }: IPropsTableManagement) => {
+const ManagementTable = ({ theme = "light", header, body, onAdd, onEdit, onDelete, onSelectedRowKeysChange }: IPropsTableManagement) => {
     // const [ selectedRows, setSelectedRows ] = useState<React.Key[]>();
     // const [ navigationItems, setNavigationItems ] = useState([]);
-    const [ selectedItemId, setSelectedItemId ] = useState<string>("") 
+    const [selectedItemId, setSelectedItemId] = useState<string>("")
     // const [ selectedParentId, setSelectedParentId ] = useState<string>("") 
     const [selectedItems, setSelectedItems] = useState<any>([]);
 
     const rowClassName = (record: DataType) => {
         if (!record.isPublish) {
-          return sx['row-disabled'];
+            return sx['row-disabled'];
         }
         return '';
     };
-    
+
     const columns: ColumnsType<DataType> = [
         ...header,
         {
@@ -39,7 +39,7 @@ const ManagementTable = ({ theme="light", header, body, onAdd, onEdit, onDelete,
             dataIndex: '',
             key: 'x',
             render: (data) => (
-                <div style={{"display": "flex", "gap": "8px"}}>                
+                <div style={{ "display": "flex", "gap": "8px" }}>
                     <Button type="button" title="Delete this navigation entry" size="small" variant="neutral" status="fail" surface="2" content="icon" theme={theme} onClick={() => onDelete(data.id)}>
                         <FontAwesomeIcon icon="trash" />
                     </Button>
@@ -53,7 +53,7 @@ const ManagementTable = ({ theme="light", header, body, onAdd, onEdit, onDelete,
             )
         }
     ];
-    
+
     const rowSelection = {
         onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
             console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
@@ -69,7 +69,7 @@ const ManagementTable = ({ theme="light", header, body, onAdd, onEdit, onDelete,
     const editHandler = async (id: string) => {
         setSelectedItemId(id)
         try {
-            const res = await fetch(`/api/navigation?id=${id}`, { method: 'GET'})
+            const res = await fetch(`/api/navigation?id=${id}`, { method: 'GET' })
             const currentNavItem = await res.json()
 
             if (!res.ok) {
@@ -83,7 +83,7 @@ const ManagementTable = ({ theme="light", header, body, onAdd, onEdit, onDelete,
 
     const deleteHandler = async (id: string | string[] | React.Key[] | undefined) => {
         console.log(id)
-        const response = await fetch(`/api/navigation?ids=${id}`, { method: 'DELETE'}).then((data) => {
+        const response = await fetch(`/api/navigation?ids=${id}`, { method: 'DELETE' }).then((data) => {
             // getNavigationData()
             console.log(`Navigation item deleted successfully ${id}`);
             console.log(data);
@@ -96,7 +96,7 @@ const ManagementTable = ({ theme="light", header, body, onAdd, onEdit, onDelete,
         console.log(selectedItemId)
         console.log(id)
         console.log(value)
-        const response = await fetch(`/api/navigation?id=${id}`, { 
+        const response = await fetch(`/api/navigation?id=${id}`, {
             method: 'PUT',
             cache: "no-cache",
             headers: {
@@ -139,27 +139,27 @@ const ManagementTable = ({ theme="light", header, body, onAdd, onEdit, onDelete,
 
         if (childItems.length === 0) return null;
 
-        return (           
-                <Table
-                    columns={columns}
-                    dataSource={childItems}
-                    showHeader={false}
-                    rowSelection={rowSelection}
-                    // rowKey="id"
-                    key={`child-table-${parentId}`}
-                    expandable={{
-                        expandedRowRender: (record) => renderChildItems(record.id)
-                    }}
-                    pagination={false}
-                    rowClassName={sx["table-row-children"]}
-                    className={sx["table-row-children"]}
-                />
+        return (
+            <Table
+                columns={columns}
+                dataSource={childItems}
+                showHeader={false}
+                rowSelection={rowSelection}
+                // rowKey="id"
+                key={`child-table-${parentId}`}
+                expandable={{
+                    expandedRowRender: (record) => renderChildItems(record.id)
+                }}
+                pagination={false}
+                rowClassName={sx["table-row-children"]}
+                className={sx["table-row-children"]}
+            />
         );
     };
 
-    
+
     const handleItemChange = (id: any) => {
-        setSelectedItems((prevSelectedItems:any) => {
+        setSelectedItems((prevSelectedItems: any) => {
             if (prevSelectedItems.includes(id)) {
                 return prevSelectedItems.filter((itemId: any) => itemId !== id);
             } else {
@@ -167,7 +167,7 @@ const ManagementTable = ({ theme="light", header, body, onAdd, onEdit, onDelete,
             }
         });
     };
-    
+
     const parentItems = body.filter((item) => !item.parentId);
 
     return (

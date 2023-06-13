@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import { IPropsDrawer } from "./interface";
 import sx from "@/styles/component.module.scss";
 import ReactDOM from "react-dom";
+import Button from "../ButtonOld";
+import Icon from "../Icon";
 
-const Drawer = ({ id, style, theme = "light", width, state, onClickOutside, children }: IPropsDrawer) => {
+const Drawer = ({ id, style, width, state, onClickOutside, children }: IPropsDrawer) => {
     const [delayedState, setDelayedState] = useState("");
     const [el, setEl] = useState<HTMLElement | null>(null);
     const innerStyle = {
@@ -34,7 +36,7 @@ const Drawer = ({ id, style, theme = "light", width, state, onClickOutside, chil
     }
 
     return ReactDOM.createPortal(
-        <div className={sx["drawer"]} id={id} style={style} data-width={width} data-state={delayedState} data-theme={theme}>
+        <div className={sx["drawer"]} id={id} style={style} data-width={width} data-state={delayedState}>
             <div className={sx["drawer-mask"]} onClick={onClickOutside}></div>
             <div className={sx["drawer-inner"]} style={innerStyle}>
                 {children}
@@ -44,13 +46,13 @@ const Drawer = ({ id, style, theme = "light", width, state, onClickOutside, chil
     );
 };
 
-const Header = (props: any) => <div className={sx['drawer-header']}>{props.children}</div>
+const Header = ({ children }: any) => <div className={sx['drawer-header']}>{children}</div>
 Drawer.Header = Header;
 
-const Body = (props: any) => <div className={sx['drawer-body']}>{props.children}</div>
+const Body = ({ children }: any) => <div className={sx['drawer-body']}>{children}</div>
 Drawer.Body = Body;
 
-const Footer = (props: any) => <div className={sx['drawer-footer']}>{props.children}</div>
+const Footer = ({ children }: any) => <div className={sx['drawer-footer']}>{children}</div>
 Drawer.Footer = Footer;
 
 export default Drawer

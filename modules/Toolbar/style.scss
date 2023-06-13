@@ -1,0 +1,16 @@
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    &-left,
+    &-right {
+        display: flex;
+        gap: var(--toolbar-gap, var(--gap-300, 12px));
+    }
+    &-left {
+        align-self: flex-start;
+    }
+    &-right {
+        align-self: flex-end;
+    }
+}

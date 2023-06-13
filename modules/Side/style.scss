@@ -1,0 +1,12 @@
+.side-content {
+    padding: var(--side-content-padding, var(--padding-450, 18px));
+    border-radius: var(--side-content-border-radius, var(--border-radius-300, 12px));
+}
+
+[data-theme="light"] .side-content {
+    background-color: var(--side-content-light-background, var(--background-color-100, #ffffff))
+}
+
+[data-theme="dark"] .side-content {
+    background-color: var(--side-content-dark-background, var(--background-color-950, #242424))
+}

@@ -1,6 +1,8 @@
+import { Shade, Size } from "@/interfaces/global";
+
 export interface Option {
     value: string;
-    label: string;
+    key: string | number;
 }
 
 export interface IPropsSelect {
@@ -11,9 +13,9 @@ export interface IPropsSelect {
     options: Option[];
     isMulti?: boolean;
     isSearchable?: boolean;
-    theme?: "light" | "dark";
     state?: "open" | "close";
-    surface?: "1" | "2";
+    shade?: Shade;
+    size?: Size;
     onChange: (value: any) => void;
     onClick?: () => void;
 }

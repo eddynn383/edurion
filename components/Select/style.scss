@@ -15,8 +15,6 @@
     &-current {
         display: flex;
         height: 100%;
-        // border-width: 1px;
-        // border-style: solid;
         border-radius: var(--select-border-radius, var(--border-radius-200, 10px));
         user-select: none;
         cursor: pointer;
@@ -25,9 +23,7 @@
             align-items: center;
             width: 100%;
             max-width: 100%;
-            height: 44px;
             overflow: auto;
-            padding: var(--select-padding-y, var(--padding-300, 12px)) var(--select-padding-x, var(--padding-300, 12px));
             font-size: var(--select-font-size, var(--font-size-400, 16px));
             line-height: var(--select-line-height, 20px);
             &[data-multiple="true"][data-selected="true"] {
@@ -61,7 +57,6 @@
         &_icon {
             display: flex;
             align-items: center;
-            padding: var(--select-padding-y, var(--padding-300, 12px)) var(--select-padding-x, var(--padding-300, 12px));
         }
     }
 
@@ -69,28 +64,6 @@
         border-radius: var(--select-border-radius, var(--border-radius-200, 10px)) var(--select-border-radius, var(--border-radius-200, 10px)) 0 0;
     }
 
-    &[data-theme="light"][data-surface="1"] &-current {
-        background-color: var(--select-light-background-color, var(--background-color-150, #F0F2F4));
-        // border-color: var(--select-light-border-color, var(--background-color-150, #F0F2F4));
-        color: var(--select-light-text-color, var(--text-color-100, #181818));
-    }
-    &[data-theme="light"][data-surface="2"] &-current {
-        background-color: var(--select-light-background-color, var(--background-color-150, #F0F2F4));
-        // border-color: var(--select-light-border-color, var(--background-color-150, #F0F2F4));
-        color: var(--select-light-text-color, var(--text-color-100, #181818));
-    }
-    
-    &[data-theme="dark"][data-surface="1"] &-current {
-        background-color: var(--select-dark-background-color, var(--background-color-900, #2E2F30));
-        // border-color: var(--select-dark-border-color, var(--background-color900, #2E2F30));
-        color: var(--select-dark-text-color, var(--text-color-950, #ffffff));
-    }
-    &[data-theme="dark"][data-surface="2"] &-current {
-        background-color: var(--select-dark-background-color, var(--background-color-950, #242424));
-        // border-color: var(--select-dark-border-color, var(--background-color900, #2E2F30));
-        color: var(--select-dark-text-color, var(--text-color-950, #ffffff));
-    }
-    
     &-dropdown {
         position: absolute;
         top: 100%;
@@ -104,9 +77,9 @@
         user-select: none;
         z-index: 1;
 
-        &_search {
-            padding: var(--select-padding-y, var(--padding-200, 8px)) var(--select-padding-x, var(--padding-300, 12px));;
-        }   
+        // &_search {
+        //     padding: var(--select-padding-y, var(--padding-200, 8px)) var(--select-padding-x, var(--padding-300, 12px));;
+        // }   
 
         &_options {
             display: block;
@@ -128,70 +101,154 @@
         }
     }
 
-    &[data-theme="light"][data-surface="1"] &-dropdown {
-        background-color: var(--select-light-background-color, var(--background-color-150, #F0F2F4));
-        color: var(--select-light-text-color, var(--text-color-100, #181818));
-        border-top-color: var(--select-dropdown-separator, var(--border-color-100, #343738));
-        &_option {
-            background-color: var(--select-option-light-background-default, var(--background-color-150, #F0F2F4));
-            color: var(--select-option-light-text-default, var(--text-color-100, #181818));
-            &:hover {
-                background-color: var(--select-option-light-background-hover, var(--accent-color-400, #f4f3f2));
-                color: var(--select-option-light-text-hover, var(--text-color-950, #ffffff));
+    &[data-size="S"] {
+        .select-current {
+            &_value {
+                padding: var(--select-current-value-s-padding-y, var(--padding-200, 8px)) var(--select-current-value-s-padding-x, var(--padding-300, 12px));
+                height: 36px;
             }
-            &[data-selected="true"] {
-                background-color: var(--select-option-light-background-selected, var(--accent-color-100, #A4C4E3));
+            &_icon {
+                padding: var(--select-current-icon-s-padding-y, var(--padding-200, 8px)) var(--select-current-icon-s-padding-x, var(--padding-300, 12px));
+            }
+        }
+        .select-dropdown { 
+            &_option {
+                padding: var(--select-dropdown-option-s-padding-y, var(--padding-200, 8px)) var(--select-dropdown-option-s-padding-x, var(--padding-300, 12px));
             }
         }
     }
 
-    &[data-theme="light"][data-surface="2"] &-dropdown {
-        background-color: var(--select-light-background-color, var(--background-color-150, #F0F2F4));
-        color: var(--select-light-text-color, var(--text-color-100, #181818));
-        border-top-color: var(--select-dropdown-separator, var(--border-color-100, #343738));
-        &_option {
-            background-color: var(--select-option-light-background-default, var(--background-color-150, #F0F2F4));
-            color: var(--select-option-light-text-default, var(--text-color-100, #181818));
-            &:hover {
-                background-color: var(--select-option-light-background-hover, var(--accent-color-400, #f4f3f2)); 
-                color: var(--select-option-light-text-hover, var(--text-color-950, #ffffff));
+    &[data-size="M"] {
+        .select-current {
+            &_value {
+                padding: var(--select-current-value-m-padding-y, var(--padding-300, 12px)) var(--select-current-value-m-padding-x, var(--padding-300, 12px));
+                height: 44px;
             }
-            &[data-selected="true"] {
-                background-color: var(--select-option-light-background-selected, var(--accent-color-100, #A4C4E3));
+            &_icon {
+                padding: var(--select-current-icon-m-padding-y, var(--padding-300, 12px)) var(--select-current-icon-m-padding-x, var(--padding-300, 12px));
+            }
+        }
+        .select-dropdown { 
+            &_option {
+                padding: var(--select-dropdown-option-m-padding-y, var(--padding-300, 12px)) var(--select-dropdown-option-m-padding-x, var(--padding-300, 12px));
             }
         }
     }
 
-    &[data-theme="dark"][data-surface="1"] &-dropdown {
-        background-color: var(--select-dark-background-color, var(--background-color-900, #2E2F30));
-        color: var(--select-dark-text-color, var(--text-color-950, #ffffff));
-        border-top-color: var(--select-dropdown-separator, var(--border-color-850, #343738));
-        &_option {
-            background-color: var(--select-option-dark-background-default, var(--background-color-900, #2E2F30));
-            color: var(--select-option-dark-text-default, var(--text-color-950, #ffffff));
-            &:hover {
-                background-color: var(--select-option-dark-background-hover, var(--accent-color-400, #f4f3f2));
-                color: var(--select-option-dark-text-hover, var(--text-color-950, #ffffff));
+    &[data-size="L"] {
+        .select-current {
+            &_value {
+                padding: var(--select-current-value-l-padding-y, var(--padding-400, 16px)) var(--select-current-value-l-padding-x, var(--padding-600, 24px));
+                height: 52px;
             }
-            &[data-selected="true"] {
-                background-color: var(--select-option-light-background-selected, var(--accent-color-100, #A4C4E3));
+            &_icon {
+                padding: var(--select-current-icon-l-padding-y, var(--padding-400, 16px)) var(--select-current-icon-l-padding-x, var(--padding-400, 16px));
+            }
+        }
+        .select-dropdown { 
+            &_option {
+                padding: var(--select-dropdown-option-l-padding-y, var(--padding-400, 16px)) var(--select-dropdown-option-l-padding-x, var(--padding-600, 24px));
+            }
+        }
+    }
+}
+
+[data-theme="light"] .select {
+    &[data-shade="100"] {
+        .select-current {
+            background-color: var(--select-light-background-color, var(--background-color-150, #F0F2F4));
+            // border-color: var(--select-light-border-color, var(--background-color-150, #F0F2F4));
+            color: var(--select-light-text-color, var(--text-color-100, #181818));
+        }
+        .select-dropdown {
+            background-color: var(--select-light-background-color, var(--background-color-150, #F0F2F4));
+            color: var(--select-light-text-color, var(--text-color-100, #181818));
+            border-top-color: var(--select-dropdown-separator, var(--border-color-100, #343738));
+            &_option {
+                background-color: var(--select-option-light-background-default, var(--background-color-150, #F0F2F4));
+                color: var(--select-option-light-text-default, var(--text-color-100, #181818));
+                &:hover {
+                    background-color: var(--select-option-light-background-hover, var(--accent-color-400, #f4f3f2));
+                    color: var(--select-option-light-text-hover, var(--text-color-950, #ffffff));
+                }
+                &[data-selected="true"] {
+                    background-color: var(--select-option-light-background-selected, var(--accent-color-100, #A4C4E3));
+                }
             }
         }
     }
 
-    &[data-theme="dark"][data-surface="2"] &-dropdown {
-        background-color: var(--select-dark-background-color, var(--background-color-950, #242424));
-        color: var(--select-dark-text-color, var(--text-color-950, #ffffff));
-        border-top-color: var(--select-dropdown-separator, var(--border-color-850, #343738));
-        &_option {
-            background-color: var(--select-option-dark-background-default, var(--background-color-950, #242424));
-            color: var(--select-option-dark-text-default, var(--text-color-950, #ffffff));
-            &:hover {
-                background-color: var(--select-option-dark-background-hover, var(--accent-color-400, #f4f3f2));
-                color: var(--select-option-dark-text-hover, var(--text-color-950, #ffffff));
+    &[data-shade="200"] {
+        .select-current {
+            background-color: var(--select-light-background-color, var(--background-color-150, #F0F2F4));
+            // border-color: var(--select-light-border-color, var(--background-color-150, #F0F2F4));
+            color: var(--select-light-text-color, var(--text-color-100, #181818));
+        }
+        .select-dropdown {
+            background-color: var(--select-light-background-color, var(--background-color-200, #E1E6E9));
+            color: var(--select-light-text-color, var(--text-color-100, #181818));
+            border-top-color: var(--select-dropdown-separator, var(--border-color-100, #343738));
+            &_option {
+                background-color: var(--select-option-light-background-default, var(--background-color-200, #E1E6E9));
+                color: var(--select-option-light-text-default, var(--text-color-100, #181818));
+                &:hover {
+                    background-color: var(--select-option-light-background-hover, var(--accent-color-400, #f4f3f2)); 
+                    color: var(--select-option-light-text-hover, var(--text-color-950, #ffffff));
+                }
+                &[data-selected="true"] {
+                    background-color: var(--select-option-light-background-selected, var(--accent-color-100, #A4C4E3));
+                }
             }
-            &[data-selected="true"] {
-                background-color: var(--select-option-light-background-selected, var(--accent-color-100, #A4C4E3));
+        }
+    }
+}
+
+[data-theme="dark"] .select {
+    &[data-shade="100"] {
+        .select-current {
+            background-color: var(--select-dark-background-color, var(--background-color-900, #2E2F30));
+            // border-color: var(--select-dark-border-color, var(--background-color900, #2E2F30));
+            color: var(--select-dark-text-color, var(--text-color-950, #ffffff));
+        }
+        .select-dropdown {
+            background-color: var(--select-dark-background-color, var(--background-color-900, #2E2F30));
+            color: var(--select-dark-text-color, var(--text-color-950, #ffffff));
+            border-top-color: var(--select-dropdown-separator, var(--border-color-850, #343738));
+            &_option {
+                background-color: var(--select-option-dark-background-default, var(--background-color-900, #2E2F30));
+                color: var(--select-option-dark-text-default, var(--text-color-950, #ffffff));
+                &:hover {
+                    background-color: var(--select-option-dark-background-hover, var(--accent-color-400, #f4f3f2));
+                    color: var(--select-option-dark-text-hover, var(--text-color-950, #ffffff));
+                }
+                &[data-selected="true"] {
+                    background-color: var(--select-option-light-background-selected, var(--accent-color-100, #A4C4E3));
+                }
+            }
+        }
+        
+    }
+    
+    &[data-shade="200"] {
+        .select-current {
+            background-color: var(--select-dark-background-color, var(--background-color-950, #242424));
+            // border-color: var(--select-dark-border-color, var(--background-color900, #2E2F30));
+            color: var(--select-dark-text-color, var(--text-color-950, #ffffff));
+        }
+        .select-dropdown {
+            background-color: var(--select-dark-background-color, var(--background-color-950, #242424));
+            color: var(--select-dark-text-color, var(--text-color-950, #ffffff));
+            border-top-color: var(--select-dropdown-separator, var(--border-color-850, #343738));
+            &_option {
+                background-color: var(--select-option-dark-background-default, var(--background-color-950, #242424));
+                color: var(--select-option-dark-text-default, var(--text-color-950, #ffffff));
+                &:hover {
+                    background-color: var(--select-option-dark-background-hover, var(--accent-color-400, #f4f3f2));
+                    color: var(--select-option-dark-text-hover, var(--text-color-950, #ffffff));
+                }
+                &[data-selected="true"] {
+                    background-color: var(--select-option-light-background-selected, var(--accent-color-100, #A4C4E3));
+                }
             }
         }
     }

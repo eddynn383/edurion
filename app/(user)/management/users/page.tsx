@@ -1,15 +1,20 @@
-import { getServerSession } from "next-auth/next";
+// import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import Section from "@/modules/Section";
 import { redirect } from "next/navigation";
 
 const Users = async () => {
-    const session = await getServerSession(authOptions);
+    // const session = await getServerSession(authOptions);
 
-    if (!session) {
-        redirect('/auth/login?callbackUrl=/Users')
-    }
-    console.log(session)
-    return <h1><p>I'm logged with user: {session.user?.email}</p></h1>;
+    // if (!session) {
+    //     redirect('/auth/login?callbackUrl=/Users')
+    // }
+    // console.log(session)
+    return (
+        <Section>
+            <h1><p>I&apos;m logged with user:</p></h1>
+        </Section>
+    );
 }
 
 export default Users

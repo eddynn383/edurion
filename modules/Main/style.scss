@@ -1,0 +1,25 @@
+.main {
+    grid-area: main;
+    overflow: hidden;
+    &-inner {
+        height: 100%;    
+    }
+}
+
+[data-theme="light"] .main {
+    background-color: var(--main-light-background-color, var(--background-color-150, #F0F2F4));
+    border-color: var(--main-light-separator-color, var(--background-color-200, #E1E6E9));
+    &-head {
+        background-color: var(--head-light-background-color, var(--background-color-150, #F0F2F4));
+        border-color: var(--head-light-separator-color, var(--background-color-200, #E1E6E9))
+    }
+}
+
+[data-theme="dark"] .main {
+    background-color: var(--main-dark-background-color, var(--background-color-900, #2E2F30));
+    border-color: var(--main-dark-separator-color, var(--background-color-850, #343738));
+    &-head {
+        background-color: var(--head-dark-background-color, var(--background-color-900, #2E2F30));
+        border-color: var(--head-dark-separator-color, var(--background-color-850, #343738))
+    }
+}

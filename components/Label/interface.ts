@@ -1,9 +1,9 @@
-import { Theme } from "@/interfaces/global";
+import { Size, Theme } from "@/interfaces/global";
 
 export interface IPropsLabel {
     id?: string;
     htmlFor: string;
-    theme?: Theme;
+    size?: Size;
     style?: React.CSSProperties;
     children: React.ReactElement | string;
 }

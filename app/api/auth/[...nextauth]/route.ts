@@ -1,15 +1,16 @@
-import NextAuth from "next-auth";
-import type { NextAuthOptions } from "next-auth";
-import type { User } from "@prisma/client";
+import NextAuth, { NextAuthOptions, Profile } from "next-auth";
+
 
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { prisma } from "@/lib/prismadb";
+
 import { compare } from "bcrypt";
 
-import prisma from "@/lib/prismadb";
+import theme from "@/lib/theme.json";
 
 if (!process.env.NEXTAUTH_SECRET) {
     throw new Error("Please provide process.env.NEXTAUTH_SECRET");
@@ -20,25 +21,14 @@ const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
 const githubClientId = process.env.GITHUB_ID;
 const githubClientSecret = process.env.GITHUB_SECRET;
 
-if (
-    !googleClientId ||
-    !googleClientSecret ||
-    !githubClientId ||
-    !githubClientSecret
-) {
-    console.log(googleClientId);
-    console.log(googleClientSecret);
-    console.log(githubClientId);
-    console.log(githubClientSecret);
+if (!googleClientId || !googleClientSecret || !githubClientId || !githubClientSecret) {
     throw new Error("Required environment variables are missing");
 }
 
-interface Credentials {
-    email?: string;
-    password?: string;
-}
-
 export const authOptions: NextAuthOptions = {
+    session: {
+        strategy: "jwt",
+    },
     providers: [
         CredentialsProvider({
             id: "credentials",
@@ -52,33 +42,47 @@ export const authOptions: NextAuthOptions = {
                 password: {
                     label: "Password",
                     type: "password",
-                },
+                }
             },
-            //@ts-ignore
-            async authorize(credentials: any, req): Promise<User | null> {
-                const { email, password } = credentials;
-                const user = await prisma.user.findUnique({ where: { email } });
+            // @ts-ignore
+            async authorize(credentials, request) {
+
+                console.log("CREDENTIALS:", credentials)
+
+                if (!credentials?.email || !credentials?.password) {
+                    return null
+                }
+
+                const user = await prisma.user.findUnique({
+                    where: {
+                        email: credentials.email
+                    }
+                });
 
                 if (!user) {
                     throw new Error("No user found");
                 }
-                //@ts-ignore
-                const passwordValid = await compare(password, user.password);
+
+                if (user.password === null) {
+                    throw new Error("User password is null");
+                }
+
+                const passwordValid = compare(credentials.password, user.password);
 
                 if (!passwordValid) {
                     throw new Error("Invalid password");
                 }
 
-                return user;
+                return user
             },
         }),
         GoogleProvider({
             clientId: googleClientId,
-            clientSecret: googleClientSecret,
+            clientSecret: googleClientSecret
         }),
         GithubProvider({
             clientId: githubClientId,
-            clientSecret: githubClientSecret,
+            clientSecret: githubClientSecret
         }),
     ],
     adapter: PrismaAdapter(prisma),
@@ -86,36 +90,128 @@ export const authOptions: NextAuthOptions = {
         signIn: "/auth/login",
     },
     callbacks: {
-        async jwt({ token }: any) {
-            const userData = await prisma.user.findUnique({
-                where: { email: token.email },
-            });
+        async session({ session, token }) {
+            console.log("Session before:", session)
 
-            if (token) {
-                console.log("***** jwt callback *****");
-                token.id = userData?.id;
-                token.roles = userData?.roles;
-                // token.theme = userData?.theme;
+            const ret = {
+                ...session,
+                user: {
+                    ...session.user,
+                    id: token.id,
+                    imageLarge: token.imageLarge,
+                    roles: token.roles
+                }
             }
 
+            console.log("Session after:", ret)
+            return ret
+        },
+        async jwt({ token, user }) {
+            console.log("Token before:", token)
+            console.log("User before:", user)
+            if (user) {
+                const u = user as unknown as any;
+                return {
+                    ...token,
+                    id: u.id,
+                    imageLarge: u.imageLarge,
+                    roles: u.roles
+                }
+            }
+            console.log("Token after:", token)
             return token;
         },
-        async session({ session, token }: any) {
-            // Send properties to the client, like an access_token from a provider.
-            if (session) {
-                console.log("***** session callback *****");
-                session.user.id = token.id;
-                session.user.roles = token.roles;
-                // session.user.theme = token.theme;
+        async signIn({ user, account, profile }) {
+            const smallAvatar = user.image
+            let largeAvatar;
+
+            if (account?.provider === 'google') {
+                largeAvatar = smallAvatar?.split('=')[0] + "=s256"
+            } else {
+                largeAvatar = smallAvatar
             }
 
-            return session;
+            console.log("++++++++ SIGN IN +++++++++")
+            console.log("USER: ", user)
+            console.log("USER AVATAR: ", largeAvatar)
+            console.log("ACCOUNT: ", account)
+            console.log("PROFILE: ", profile)
+            const existingUser = await prisma.user.findUnique({
+                where: {
+                    email: user.email
+                }
+            });
+
+            if (!existingUser) {
+                const newUser = await prisma.user.create({
+                    data: {
+                        name: user.name,
+                        email: user.email,
+                        image: user.image,
+                        imageLarge: largeAvatar, // Modify the image URL for larger size
+                    },
+                })
+
+                if (account) {
+                    await prisma.account.create({
+                        data: {
+                            type: account.type,
+                            provider: account.provider,
+                            providerAccountId: account.providerAccountId,
+                            access_token: account.access_token,
+                            expires_at: account.expires_at,
+                            scope: account.scope,
+                            token_type: account.token_type,
+                            id_token: account.id_token,
+                            user: {
+                                connect: {
+                                    id: newUser.id,
+                                }
+                            },
+
+                        }
+                    })
+                }
+                // if (profile) {
+                await prisma.profile.create({
+                    data: {
+                        user: {
+                            connect: {
+                                email: profile?.email
+                            }
+                        }
+                    }
+                })
+                // }
+
+                await prisma.userPreferences.create({
+                    data: {
+                        themeMode: "light",
+                        theme: {
+                            create: {
+                                defaultStyle: {
+                                    light: theme.light,
+                                    dark: theme.dark
+                                },
+                                customStyles: {},
+                            },
+                        },
+                        user: {
+                            connect: {
+                                id: newUser.id,
+                            }
+                        },
+                        paymentMethods: "{}",
+                    }
+                });
+            }
+
+            return Promise.resolve(true);
         }
+
     },
     debug: process.env.NODE_ENV === "development",
-    session: {
-        strategy: "jwt",
-    },
+
     jwt: {
         secret: process.env.NEXTAUTH_JWT_SECRET,
     },

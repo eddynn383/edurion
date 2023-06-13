@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import bcrypt from "bcrypt"
-import prisma from "@/lib/prismadb";
+import { prisma } from "@/lib/prismadb";
+import theme from "@/lib/theme.json";
 
 interface ResponseData {
     error?: string;
@@ -34,17 +35,21 @@ const validateForm = async (email: string, password: string) => {
 };
 
 export const POST = async (request: Request) => {
-    const { name, email, password, roles } = await request.json();
+    const { name, email, password } = await request.json();
+    const defaultTheme = theme
 
     try {
         const errorMessage = await validateForm(email, password);
 
         if (errorMessage) {
-            return new Response(errorMessage.error, { status: 400 });
+            return NextResponse.json({ error: errorMessage.error }, { status: 400 });
         }
 
         // encrypt the password
         const hashedPassword = await bcrypt.hash(password, 12);
+
+        // create user preferences
+
 
         // insert the new user into database
         const user: any = await prisma.user.create({
@@ -52,23 +57,46 @@ export const POST = async (request: Request) => {
                 name,
                 email,
                 password: hashedPassword,
-                roles
             },
         })
 
-        const theme: any = await prisma.theme.create({
+        const profile = await prisma.profile.create({
             data: {
-                type: 'LIGHT',
-                style: [],
-                userId: user.id,
+                user: {
+                    connect: {
+                        email: user.email
+                    }
+                },
+                avatar: user?.image || ""
+            }
+        })
+
+        const userPreferences = await prisma.userPreferences.create({
+            data: {
+                themeMode: "light",
+                theme: {
+                    create: {
+                        defaultStyle: {
+                            light: defaultTheme.light,
+                            dark: defaultTheme.dark
+                        },
+                        customStyles: {},
+                    },
+                },
+                user: {
+                    connect: {
+                        id: user.id,
+                    }
+                },
+                paymentMethods: "{}",
             },
         });
 
         // return new Response(JSON.stringify(user, theme), { status: 201 })
-        return NextResponse.json({ user, theme })
+        return NextResponse.json({ user, profile, userPreferences }, { status: 200 })
 
     } catch (error: any) {
-        return new Response("Failed to create a new user", { status: 500 });
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
     }
 
 }

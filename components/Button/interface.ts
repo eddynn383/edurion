@@ -1,6 +1,4 @@
-import { Status, Theme } from "@/interfaces/global"
-
-type ButtonStatus = Status | "accent";
+import { Status, Shade, Mode, Size, Content } from "@/interfaces/global"
 
 export interface IPropsButton {
     id?: string;
@@ -8,13 +6,15 @@ export interface IPropsButton {
     title?: string;
     disabled?: boolean;
     style?: React.CSSProperties;
+    selected?: boolean;
+    controls?: string,
+    size: Size;
+    mode?: Mode;
+    status?: Status;
+    variant?: "solid" | "outline";
+    shade?: Shade;
+    content?: Content;
     value?: string;
-    theme?: Theme;
-    size: "xsmall" | "small" | "medium" | "large";
-    variant?: "solid" | "outline" | "neutral" | "text";
-    status?: ButtonStatus;
-    surface?: "1" | "2";
-    content?: "text" | "icon";
     onClick?: any;
-    children?: React.ReactNode | string;
+    children?: React.ReactNode | React.ReactNode[] | string;
 }

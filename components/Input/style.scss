@@ -64,45 +64,45 @@
         }
     }
 
-    &[data-size="small"] {
-        padding: var(--input-medium-padding-y, var(--padding-200, 8px)) var(--input-medium-padding-x, var(--padding-300, 12px));
-        gap: var(--input-small-gap, var(--gap-300, 12px));
+    &[data-size="S"] {
+        padding: var(--input-s-padding-y, var(--padding-200, 8px)) var(--input-s-padding-x, var(--padding-300, 12px));
+        gap: var(--input-s-gap, var(--gap-300, 12px));
 
         &:before {
             border-radius: 6px;
         }
 
         input {
-            font-size: var(--input-small-font-size, var(--font-size-400, 16px));
-            line-height: var(--input-small-line-height, 18px);
+            font-size: var(--input-s-font-size, var(--font-size-400, 16px));
+            line-height: var(--input-s-line-height, 18px);
         }
     }
 
-    &[data-size="medium"] {
-        padding: var(--input-medium-padding-y, var(--padding-300, 12px)) var(--input-medium-padding-x, var(--padding-300, 12px));
-        gap: var(--input-medium-gap, var(--gap-300, 12px));
+    &[data-size="M"] {
+        padding: var(--input-m-padding-y, var(--padding-300, 12px)) var(--input-m-padding-x, var(--padding-300, 12px));
+        gap: var(--input-m-gap, var(--gap-300, 12px));
 
         &:before {
             border-radius: 8px;
         }
 
         input {
-            font-size: var(--input-medium-font-size, var(--font-size-400, 16px));
-            line-height: var(--input-medium-line-height, 18px);
+            font-size: var(--input-m-font-size, var(--font-size-400, 16px));
+            line-height: var(--input-m-line-height, 18px);
         }
     }
 
-    &[data-size="large"] {
-        padding: var(--input-large-padding-y, var(--padding-400, 16px)) var(--input-large-padding-x, var(--padding-600, 24px));
-        gap: var(--input-large-gap, var(--gap-300, 12px));
+    &[data-size="L"] {
+        padding: var(--input-l-padding-y, var(--padding-400, 16px)) var(--input-l-padding-x, var(--padding-600, 24px));
+        gap: var(--input-l-gap, var(--gap-300, 12px));
 
         &:before {
             border-radius: 10px;
         }
 
         input {
-            font-size: var(--input-large-font-size, var(--font-size-400, 16px));
-            line-height: var(--input-large-line-height, 18px);
+            font-size: var(--input-l-font-size, var(--font-size-400, 16px));
+            line-height: var(--input-l-line-height, 18px);
         }
     }
 
@@ -135,8 +135,10 @@
     .show-pass {
         background-color: red !important;
     }
+}
 
-    &[data-theme="light"][data-shade="100"] {
+[data-theme="light"] .input {
+    &[data-shade="100"] {
         background: var(--input-background-color-default, var(--background-color-150, #F0F2F4));
         border-color: var(--input-border-color-default, var(--border-color-150, #F0F2F4));
         color: var(--input-text-color, var(--text-color-200, #363636));
@@ -171,7 +173,7 @@
         }
     }
 
-    &[data-theme="light"][data-shade="200"] {
+    &[data-shade="200"] {
         background: var(--input-background-color-default, var(--background-color-200, #E1E6E9));
         border-color: var(--input-border-color-default, var(--border-color-200, #E1E6E9));
         color: var(--input-text-color, var(--text-color-200, #363636));
@@ -205,8 +207,10 @@
             }
         }
     }
+}
 
-    &[data-theme="dark"][data-shade="100"] {
+[data-theme="dark"] .input {
+    &[data-shade="100"] {
         background: var(--input-background-color-default, var(--background-color-950, #242424));
         border-color: var(--input-border-color-default, var(--border-color-950, #242424));
         color: var(--input-text-color, var(--text-color-950, #ffffff));
@@ -242,7 +246,7 @@
         }
     }
 
-    &[data-theme="dark"][data-shade="200"] {
+    &[data-shade="200"] {
         background: var(--input-background-color-default, var(--background-color-900, #2E2F30));
         border-color: var(--input-border-color-default, var(--border-color-900, #2E2F30));
         color: var(--input-text-color, var(--text-color-950, #ffffff));

@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { IPropsInput } from "./interface";
-import Label from "@/components/Label";
 import Icon from "../Icon";
 
 import sx from "@/styles/component.module.scss";
 
-const Input = ({ id, name, type, innerRef, placeholder, value, required, autoComplete, ariaInvalid, ariaDescribedBy, style, theme = "light", variant = "outline", shade = "100", size = "medium", status = "default", iconBefore, iconAfter, onClick, onChange }: IPropsInput) => {
+const Input = ({ id, name, type, innerRef, placeholder, value, required, autoComplete, ariaInvalid, ariaDescribedBy, style, variant = "outline", shade = "100", size = "M", status = "default", iconBefore, iconAfter, onClick, onChange }: IPropsInput) => {
     const [inputType, setInputType] = useState(type);
     const [currentStatus, setCurrentStatus] = useState(status);
     const [focus, setFocus] = useState(false);
@@ -40,7 +39,7 @@ const Input = ({ id, name, type, innerRef, placeholder, value, required, autoCom
     }, [status])
 
     return (
-        <div className={sx["input"]} id={id} style={style} data-theme={theme} data-variant={variant} data-shade={shade} data-size={size} data-status={currentStatus} data-icon={iconBefore && iconAfter ? 'both' : iconBefore ? 'before' : iconAfter ? 'after' : null} data-focus={focus}>
+        <div className={sx["input"]} id={id} style={style} data-variant={variant} data-shade={shade} data-size={size} data-status={currentStatus} data-icon={iconBefore && iconAfter ? 'both' : iconBefore ? 'before' : iconAfter ? 'after' : null} data-focus={focus}>
             {iconBefore}
             {
                 <input className={sx["input-inner"]} {...innerProps} type={inputType} aria-invalid={ariaInvalid} aria-describedby={ariaDescribedBy} />

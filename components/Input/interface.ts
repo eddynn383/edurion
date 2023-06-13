@@ -1,4 +1,4 @@
-import { Status, Theme } from "@/interfaces/global"
+import { Shade, Size, Status } from "@/interfaces/global"
 
 export interface IPropsInput {
     id: string;
@@ -13,10 +13,9 @@ export interface IPropsInput {
     ariaInvalid?: any;
     ariaDescribedBy?: any;
     style?: React.CSSProperties;
-    theme?: Theme;
     variant?: "solid" | "outline" | "opposite" | "text";
-    shade?: "100" | "200";
-    size?: "small" | "medium" | "large";
+    shade?: Shade;
+    size?: Size;
     status?: Status;
     iconBefore?: React.ReactElement;
     iconAfter?: React.ReactElement;

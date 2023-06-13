@@ -3,9 +3,8 @@ import Image from "next/image";
 import Button from '@/components/Button';
 import Google from "@/public/assets/images/google.svg";
 import Github from "@/public/assets/images/github.svg";
-import { IPropsThirdPartyLogin } from "./interface";
 
-const ThirdPartyLogin = ({ theme }: IPropsThirdPartyLogin) => {
+const ThirdPartyLogin = () => {
 
     // Google Handler function
     async function handleGoogleSignin() {
@@ -19,8 +18,8 @@ const ThirdPartyLogin = ({ theme }: IPropsThirdPartyLogin) => {
 
     return (
         <div style={{ 'display': 'flex', 'gap': '16px' }}>
-            <Button size="large" type="button" variant="neutral" status="neutral" surface="2" theme={theme} style={{ "width": "100%" }} onClick={handleGoogleSignin}><Image src={Google} alt="Google" width="16" /> Google</Button>
-            <Button size="large" type="button" variant="neutral" status="neutral" surface="2" theme={theme} style={{ "width": "100%" }} onClick={handleGithubSignin}><Image src={Github} alt="Github" width="16" /> Github</Button>
+            <Button type="button" mode="secondary" variant="outline" status="accent" shade="150" size="L" style={{ "width": "100%" }} onClick={handleGoogleSignin}><Image src={Google} alt="Google" width="16" /> Google</Button>
+            <Button type="button" mode="secondary" variant="outline" status="accent" shade="150" size="L" style={{ "width": "100%" }} onClick={handleGithubSignin}><Image src={Github} alt="Github" width="16" /> Github</Button>
         </div>
     )
 }

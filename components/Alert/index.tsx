@@ -5,18 +5,18 @@ import StatusIcon from "@/components/StatusIcon";
 import { IPropsAlert } from "./interface";
 import sx from "@/styles/component.module.scss";
 import ProgressRadial from '../ProgressRadial';
-import Button from '../Button';
+import Button from '../ButtonOld';
 import Icon from '../Icon';
 
-const Alert = ({ id, theme = "light", variant = "solid", status, action, position = "static", style, delay, children }: IPropsAlert) => {
+const Alert = ({ id, variant = "solid", status, action, position = "static", style, delay, children }: IPropsAlert) => {
 
     // const [visible, setVisible] = useState(true);
     const [loading, setLoading] = useState(true);
     const [progress, setProgress] = useState(0);
     const loadingDuration = 3000;
 
-    if (delay) {
-        useEffect(() => {
+    useEffect(() => {
+        if (delay) {
             const loadingTimeout = setTimeout(() => {
                 if (progress >= 100) return
                 setProgress(progress + 1)
@@ -27,17 +27,17 @@ const Alert = ({ id, theme = "light", variant = "solid", status, action, positio
             }
 
             return () => clearTimeout(loadingTimeout);
-        }, [progress, loading]);
+        }
+    }, [progress, loading]);
 
-        // if (!visible) {
-        //     return null;
-        // }
-    }
+    // if (!visible) {
+    //     return null;
+    // }
 
 
 
     return (
-        <div className={sx["alert"]} id={id} style={style} data-theme={theme} data-variant={variant} data-status={status} data-position={position}>
+        <div className={sx["alert"]} id={id} style={style} data-variant={variant} data-status={status} data-position={position}>
             <div className={sx['alert-icon']}>
                 <StatusIcon status={status} />
             </div>

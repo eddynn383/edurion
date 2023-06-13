@@ -1,0 +1,17 @@
+.file-preview {
+    .fileList {
+        display: flex;
+        margin-top: 1rem;
+        gap: 1rem;
+        width: 400px;
+    }
+
+    .fileContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .fileName {
+        margin-left: 2rem;
+    }
+}

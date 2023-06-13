@@ -1,16 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import ProfileAvatar from "@/public/assets/images/profile-avatar.png";
 import Avatar from "@/components/Avatar";
-import sx from "@/styles/component.module.scss";
-import Link from "../Link";
-import Button from "../Button";
+import Link from "@/components/Link";
+import useClickOutside from "@/hooks/useClickOutside";
+import { IPropsProfile } from "./interface";
 
-const Profile = ({ data, id, theme = "light", size }: any) => {
+import sx from "@/styles/component.module.scss";
+
+const Profile = ({ id, size }: IPropsProfile) => {
     const { data: session, status } = useSession()
-    const [dropdownVisiblity, setDropdownVisiblity] = useState(false)
+    const [showOptions, setShowOptions] = useState(false)
+    const wrapperRef = useRef<HTMLDivElement>(null);
+
+    useClickOutside(wrapperRef, () => setShowOptions(false));
 
     if (status === "loading") {
         return <div>Loading...</div>
@@ -25,31 +30,31 @@ const Profile = ({ data, id, theme = "light", size }: any) => {
     const role = roles[roles.length - 1]
 
     return (
-        <div className={sx["profile"]} id={id} data-theme={theme} data-size={size} onClick={() => setDropdownVisiblity(prev => !prev)} aria-expanded={dropdownVisiblity} >
+        <div className={sx["profile"]} id={id} data-size={size} onClick={() => setShowOptions(!showOptions)} aria-expanded={showOptions} >
             <div className={sx["profile-button"]}>
                 <div className={sx["profile-left"]}>
-                    <Avatar src={image ? image : ProfileAvatar} alt={email} theme={theme} size={size} type="square" />
+                    <Avatar src={image ? image : ProfileAvatar} alt={email} size={size} type="square" />
                 </div>
                 <div className={sx["profile-right"]}>
                     <span className={sx["profile-name"]}>{name ? name : email}</span>
-                    {size !== "small" && <span className={sx["profile-role"]}>{role}</span>}
+                    {size !== "S" && <span className={sx["profile-role"]}>{role}</span>}
                 </div>
             </div>
             {
-                dropdownVisiblity &&
-                <div className={sx["dropdown"]}>
+                showOptions &&
+                <div className={sx["profile-dropdown"]}>
                     <ul>
-                        <li>
+                        <li className={sx["dropdown-item"]}>
                             <Link href="/profile">Profile</Link>
                         </li>
-                        <li>
+                        <li className={sx["dropdown-item"]}>
                             <Link href="/my-purchases">My Purchases</Link>
                         </li>
-                        <li>
+                        <li className={sx["dropdown-item"]}>
                             <Link href="/settings">Settings</Link>
                         </li>
-                        <li>
-                            <Button type="button" size="small" onClick={signOut}>Log Out</Button>
+                        <li className={sx["dropdown-item"]}>
+                            <Link status="fail" onClick={signOut}>Log Out</Link>
                         </li>
                     </ul>
                 </div>

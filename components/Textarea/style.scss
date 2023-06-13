@@ -81,45 +81,45 @@
         resize: none;
     }
 
-    &[data-size="small"] {
-        padding: var(--textarea-medium-padding-y, var(--padding-200, 8px)) var(--textarea-medium-padding-x, var(--padding-300, 12px));
-        gap: var(--textarea-small-gap, var(--gap-300, 12px));
+    &[data-size="S"] {
+        padding: var(--textarea-s-padding-y, var(--padding-200, 8px)) var(--textarea-s-padding-x, var(--padding-300, 12px));
+        gap: var(--textarea-s-gap, var(--gap-300, 12px));
 
         &:before {
             border-radius: 6px;
         }
 
         textarea {
-            font-size: var(--textarea-small-font-size, var(--font-size-400, 16px));
-            line-height: var(--textarea-small-line-height, 18px);
+            font-size: var(--textarea-s-font-size, var(--font-size-400, 16px));
+            line-height: var(--textarea-s-line-height, 18px);
         }
     }
 
-    &[data-size="medium"] {
-        padding: var(--textarea-medium-padding-y, var(--padding-300, 12px)) var(--textarea-medium-padding-x, var(--padding-300, 12px));
-        gap: var(--textarea-medium-gap, var(--gap-300, 12px));
+    &[data-size="M"] {
+        padding: var(--textarea-m-padding-y, var(--padding-300, 12px)) var(--textarea-m-padding-x, var(--padding-300, 12px));
+        gap: var(--textarea-m-gap, var(--gap-300, 12px));
 
         &:before {
             border-radius: 8px;
         }
 
         textarea {
-            font-size: var(--textarea-medium-font-size, var(--font-size-400, 16px));
-            line-height: var(--textarea-medium-line-height, 18px);
+            font-size: var(--textarea-m-font-size, var(--font-size-400, 16px));
+            line-height: var(--textarea-m-line-height, 18px);
         }
     }
 
-    &[data-size="large"] {
-        padding: var(--textarea-large-padding-y, var(--padding-400, 16px)) var(--textarea-large-padding-x, var(--padding-600, 24px));
-        gap: var(--textarea-large-gap, var(--gap-300, 12px));
+    &[data-size="L"] {
+        padding: var(--textarea-l-padding-y, var(--padding-400, 16px)) var(--textarea-l-padding-x, var(--padding-600, 24px));
+        gap: var(--textarea-l-gap, var(--gap-300, 12px));
 
         &:before {
             border-radius: 10px;
         }
 
         textarea {
-            font-size: var(--textarea-large-font-size, var(--font-size-400, 16px));
-            line-height: var(--textarea-large-line-height, 18px);
+            font-size: var(--textarea-l-font-size, var(--font-size-400, 16px));
+            line-height: var(--textarea-l-line-height, 18px);
         }
     }
 
@@ -153,13 +153,16 @@
         background-color: red !important;
     }
 
-    &[data-theme="light"][data-shade="100"] {
-        background: var(--textarea-background-color-default, var(--background-color-150, #F0F2F4));
-        border-color: var(--textarea-border-color-default, var(--border-color-150, #F0F2F4));
-        color: var(--textarea-text-color, var(--text-color-200, #363636));
+}
+
+[data-theme="light"] .textarea {
+    &[data-shade="100"] {
+        background: var(--textarea-light-background-color-default, var(--background-color-150, #F0F2F4));
+        border-color: var(--textarea--light-border-color-default, var(--border-color-150, #F0F2F4));
+        color: var(--textarea-light-text-color, var(--text-color-200, #363636));
         textarea {
             color: inherit;
-
+    
             &:-webkit-autofill,
             &:-webkit-autofill:hover,
             &:-webkit-autofill:focus,
@@ -168,19 +171,19 @@
                 -webkit-box-shadow: 0 0 0 30px var(--background-color-150, #F0F2F4) inset !important;
                 -webkit-text-fill-color: var(--text-color-200, #363636)
             }
-
+    
             &::placeholder {
                 /* Chrome, Firefox, Opera, Safari 10.1+ */
                 color: var(--textarea-placeholder-color, var(--text-color-700, #5B6367));
                 opacity: 1;
                 /* Firefox */
             }
-
+    
             &:-ms-textarea-placeholder {
                 /* Internet Explorer 10-11 */
                 color: var(--textarea-placeholder-color, var(--text-color-700, #5B6367));
             }
-
+    
             &::-ms-textarea-placeholder {
                 /* Microsoft Edge */
                 color: var(--textarea-placeholder-color, var(--text-color-700, #5B6367));
@@ -188,10 +191,10 @@
         }
     }
 
-    &[data-theme="light"][data-shade="200"] {
-        background: var(--textarea-background-color-default, var(--background-color-200, #E1E6E9));
-        border-color: var(--textarea-border-color-default, var(--border-color-200, #E1E6E9));
-        color: var(--textarea-text-color, var(--text-color-200, #363636));
+    &[data-shade="200"] {
+        background: var(--textarea-light-background-color-default, var(--background-color-200, #E1E6E9));
+        border-color: var(--textarea-light-border-color-default, var(--border-color-200, #E1E6E9));
+        color: var(--textarea-light-text-color, var(--text-color-200, #363636));
         textarea {
             color: inherit;
 
@@ -222,11 +225,13 @@
             }
         }
     }
+}
 
-    &[data-theme="dark"][data-shade="100"] {
-        background: var(--textarea-background-color-default, var(--background-color-950, #242424));
-        border-color: var(--textarea-border-color-default, var(--border-color-950, #242424));
-        color: var(--textarea-text-color, var(--text-color-950, #ffffff));
+[data-theme="dark"] .textarea {
+    &[data-shade="100"] {
+        background: var(--textarea-dark-background-color-default, var(--background-color-950, #242424));
+        border-color: var(--textarea-dark-border-color-default, var(--border-color-950, #242424));
+        color: var(--textarea-dark-text-color, var(--text-color-950, #ffffff));
 
         textarea {
             color: inherit;
@@ -259,10 +264,10 @@
         }
     }
 
-    &[data-theme="dark"][data-shade="200"] {
-        background: var(--textarea-background-color-default, var(--background-color-900, #2E2F30));
-        border-color: var(--textarea-border-color-default, var(--border-color-900, #2E2F30));
-        color: var(--textarea-text-color, var(--text-color-950, #ffffff));
+    &[data-shade="200"] {
+        background: var(--textarea-dark-background-color-default, var(--background-color-900, #2E2F30));
+        border-color: var(--textarea-dark-border-color-default, var(--border-color-900, #2E2F30));
+        color: var(--textarea-dark-text-color, var(--text-color-950, #ffffff));
 
         textarea {
             color: inherit;

@@ -3,9 +3,11 @@
 import MenuItem from "@/components/MenuItem";
 import { IMenuItem } from "@/components/MenuItem/interface";
 import { IPropsMenu } from "./interface";
+import { useTheme } from 'next-themes';
+
 import sx from "@/styles/component.module.scss";
 
-const Menu = ({ id, style, data, theme = "light" }: IPropsMenu) => {
+const Menu = ({ id, style, data }: IPropsMenu) => {
 
     let active = false
 
@@ -14,8 +16,6 @@ const Menu = ({ id, style, data, theme = "light" }: IPropsMenu) => {
         active = !active
     }
 
-    // console.log(data)
-
     return (
         <nav className={sx.menu} id={id} style={style} >
             <ul data-level={1}>
@@ -23,7 +23,7 @@ const Menu = ({ id, style, data, theme = "light" }: IPropsMenu) => {
                     data?.map((item: IMenuItem, i: React.Key) => {
                         const depthLevel = 0
                         return (
-                            <MenuItem item={item} key={i} depthLevel={depthLevel} theme={theme} />
+                            <MenuItem item={item} key={i} depthLevel={depthLevel} />
                         )
                     })
                 }

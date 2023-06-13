@@ -1,5 +1,6 @@
 import { Providers } from "./providers";
-import { getServerSession } from "next-auth/next";
+// import { getServerSession } from "next-auth/next";
+import { getUserPreferences } from "@/lib/getData";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import "@/styles/globals.scss"
 
@@ -13,8 +14,11 @@ export const metadata = {
 };
 
 const RootLayout = async ({ children }: IPropsRootLayout) => {
+    const prefs = await getUserPreferences()
+    const theme = prefs?.themeMode
+    console.log("THEME in ROOT:", theme)
     return (
-        <html lang="en">
+        <html lang="en" data-theme={theme ? theme : "light"}>
             <body>
                 <Providers>
                     {children}

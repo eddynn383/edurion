@@ -1,10 +1,8 @@
-import { Theme } from "@/interfaces/global";
-
 export interface IPropsCheckbox {
+    id: string;
     children?: string;
     checked: boolean;
     indeterminate: boolean;
-    theme?: Theme;
-    size?: "small" | "medium" | "large";
+    size?: "S" | "M" | "L";
     onChange: () => void
 }

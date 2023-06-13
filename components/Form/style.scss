@@ -1,5 +1,5 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: var(--form-gap, var(--gap-500, 20px));
 }

@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import Icon from "../Icon";
 
+import { IPropsTextarea } from "./interface";
 import sx from "@/styles/component.module.scss";
 
-const Textarea = ({ id, name, type, innerRef, placeholder, rows, columns, value, required, autoComplete, ariaInvalid, ariaDescribedBy, style, theme = "light", variant = "outline", shade = "100", size = "medium", status = "default", allowResize = "both", iconBefore, iconAfter, onClick, onChange }: any) => {
+const Textarea = ({ id, name, type, innerRef, placeholder, rows, columns, value, required, autoComplete, ariaInvalid, ariaDescribedBy, style, variant = "outline", shade = "100", size = "M", status = "default", allowResize = "both", iconBefore, iconAfter, onClick, onChange }: IPropsTextarea) => {
     const [inputType, setInputType] = useState(type);
     const [currentStatus, setCurrentStatus] = useState(status);
     const [focus, setFocus] = useState(false);
@@ -39,7 +40,7 @@ const Textarea = ({ id, name, type, innerRef, placeholder, rows, columns, value,
     }, [status])
 
     return (
-        <div className={sx["textarea"]} id={id} style={style} data-theme={theme} data-variant={variant} data-shade={shade} data-size={size} data-status={currentStatus} data-icon={iconBefore && iconAfter ? 'both' : iconBefore ? 'before' : iconAfter ? 'after' : null} data-resize={allowResize} data-focus={focus}>
+        <div className={sx["textarea"]} id={id} style={style} data-variant={variant} data-shade={shade} data-size={size} data-status={currentStatus} data-icon={iconBefore && iconAfter ? 'both' : iconBefore ? 'before' : iconAfter ? 'after' : null} data-resize={allowResize} data-focus={focus}>
             {iconBefore}
             {
                 <textarea className={sx["textarea-inner"]} {...innerProps} aria-invalid={ariaInvalid} aria-describedby={ariaDescribedBy} />

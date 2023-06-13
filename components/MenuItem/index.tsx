@@ -8,8 +8,9 @@ import NoLink from "@/components/MenuNoLink";
 import MenuDropdown from "@/components/MenuDropdown";
 import { IPropsMenuItem } from "./interface";
 import sx from "@/styles/component.module.scss";
+import { handleScrollToSection } from "@/lib/utils";
 
-const MenuItem = ({ id, style, item, depthLevel, theme = "light" }: IPropsMenuItem) => {
+const MenuItem = ({ id, style, item, depthLevel }: IPropsMenuItem) => {
     const [show, setShow] = useState(false)
 
     const pathname = usePathname()
@@ -21,11 +22,15 @@ const MenuItem = ({ id, style, item, depthLevel, theme = "light" }: IPropsMenuIt
             {
                 item.children ? (
                     <>
-                        <NoLink title={item.title} iconBefore={item.icon && <Icon value={item.icon} theme={theme} />} text={item.title} iconAfter={<Icon value="chevron-right" theme={theme} />} theme={theme} onClick={() => setShow(prev => !prev)} />
-                        <MenuDropdown items={item.children} parent={item.title} setShow={setShow} show={show} depthLevel={depthLevel} theme={theme} />
+                        <NoLink title={item.title} iconBefore={item.icon && <Icon value={item.icon} />} text={item.title} iconAfter={<Icon value="chevron-right" />} onClick={() => setShow(prev => !prev)} />
+                        <MenuDropdown items={item.children} parent={item.title} setShow={setShow} show={show} depthLevel={depthLevel} />
                     </>
                 ) : (
-                    <Link to={item.url} title={item.title} iconBefore={item.icon && <Icon value={item.icon} theme={theme} />} text={item.title} theme={theme} />
+                    item.url ? (
+                        <Link to={item.url} title={item.title} iconBefore={item.icon && <Icon value={item.icon} />} text={item.title} />
+                    ) : (
+                        <NoLink title={item.title} iconBefore={item.icon && <Icon value={item.icon} />} text={item.title} onClick={() => handleScrollToSection(item?.id)} />
+                    )
                 )
             }
         </li>
