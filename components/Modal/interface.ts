@@ -4,7 +4,6 @@ export interface IPropsModal {
     id?: string,
     title?: string,
     style?: React.CSSProperties,
-    theme?: Theme,
     state: "open" | "close",
     onClickOutside?: () => void,
     onClose?: () => void,

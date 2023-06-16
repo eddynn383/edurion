@@ -1,5 +1,6 @@
 // import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import Content from "@/modules/Content";
 import Section from "@/modules/Section";
 import { redirect } from "next/navigation";
 
@@ -14,9 +15,13 @@ const Home = async () => {
     //     }
     // }
     return (
-        <Section>
-            <h1>Hello, Bula cu id!</h1>;
-        </Section>
+        <Content>
+            <Content.Body>
+                <Section>
+                    <h1>Hello, you are on the home page!</h1>
+                </Section>
+            </Content.Body>
+        </Content>
     )
 
 }

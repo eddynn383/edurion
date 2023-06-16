@@ -1,0 +1,15 @@
+.table-actions {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) translateX(100%);
+    background-color: #fff;
+    padding-inline: 40px;
+    transition: transform .3s ease-in-out;
+}
+
+.table-row:hover {
+    .table-actions {
+        transform: translateY(-50%) translateX(0%);
+    }
+}

@@ -1,0 +1,35 @@
+.star {
+    position: relative;
+    label,
+    input {
+        position: absolute;
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        visibility: hidden;
+    }
+    .icon--star {
+        font-size: 14px;
+    }
+    &-icon {
+        position: relative;
+        &-base {
+            color: var(--star-default-color, var(--background-color-300, #C4CCD0));
+            .icon.icon {
+                color: inherit;
+            }
+        }
+        &-fill {
+            color: var(--star-fill-color, var(--warning-color-400, #FF9F1C));
+            position: absolute;
+            top: 0;
+            overflow: hidden;
+            z-index: 1;
+            .icon.icon {
+                justify-content: flex-start;
+                color: inherit;
+            }
+        }
+    }
+}

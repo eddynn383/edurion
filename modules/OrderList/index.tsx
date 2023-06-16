@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import ItemList from '../ItemList';
 import { IPropsOrderList } from './interface'
 
-const OrderList = ({theme="light", header, body, loading, onAdd, onEdit, onDelete, onSelectedRowKeysChange}: IPropsOrderList) => {
+const OrderList = ({ header, body, loading, onAdd, onEdit, onDelete, onSelectedRowKeysChange }: IPropsOrderList) => {
 
     const [tiles, setTiles] = useState<any>([]);
     const [allSelected, setAllSelected] = useState<boolean>(false);
@@ -17,7 +17,7 @@ const OrderList = ({theme="light", header, body, loading, onAdd, onEdit, onDelet
     const updateDatabase = async (newOrder: any) => {
         // Implement your API call to update the database with the new order
     };
-    
+
     const handleSelectAll = () => {
         const newState = !allSelected;
         setAllSelected(newState);
@@ -49,7 +49,7 @@ const OrderList = ({theme="light", header, body, loading, onAdd, onEdit, onDelet
             onToggleSelect={handleToggleSelect}
             allSelected={allSelected}
             indeterminate={indeterminate}
-      />
+        />
     )
 }
 

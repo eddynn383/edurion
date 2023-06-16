@@ -13,6 +13,9 @@ import PageTitle from '@/components/PageTitle';
 import Profile from "@/components/Profile"
 import Header from '@/modules/Header';
 import sx from "@/styles/layout.module.scss";
+import { authOptions } from '../api/auth/[...nextauth]/route';
+import { getServerSession } from 'next-auth/next';
+import useRoleValidation from '@/hooks/useRoleValidation';
 
 interface IPropsUserLayout {
     children: React.ReactNode;
@@ -96,6 +99,9 @@ const staticMenu: IMenuItem[] = [
 export default async function UserLayout({ children }: IPropsUserLayout) {
     const prefs = await getUserPreferences()
     const theme = prefs?.themeMode as Theme
+    const [isSuccess] = await useRoleValidation()
+
+
 
 
     return (
@@ -119,7 +125,7 @@ export default async function UserLayout({ children }: IPropsUserLayout) {
                             <PageTitle />
                         </Header.Left>
                         <Header.Right>
-                            <Button type="button" mode="primary" variant="solid" status="accent" size="M" content="text" >Create</Button>
+                            {isSuccess && <Button type="button" mode="primary" variant="solid" status="accent" size="M" content="text" >Create</Button>}
                             <Button type="button" mode="secondary" variant="solid" status="accent" shade="150" size="M" content="icon" >
                                 <>
                                     <Icon value="comment" />

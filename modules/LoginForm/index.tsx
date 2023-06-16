@@ -60,12 +60,12 @@ const LoginForm = ({ cn }: any) => {
             {loading && <Loading />}
             <ThirdPartyLogin />
             <span className={sx["form_separator"]}>or continue with email</span>
-            <Form cn={sx["form_group"]} onSubmit={handleSubmit}>
+            <Form cn={sx["form_group"]} action={handleSubmit}>
                 <InputGroup>
                     <div style={{ "display": "flex", "justifyContent": "space-between", "marginBottom": "4px" }}>
                         <Label htmlFor="login_email">Email</Label>
                         {emailStatus === "fail" && <div className={sx["form_error"]}>
-                            <Text size="small" status={emailStatus}>{emailErrorMsg}</Text>
+                            <Text size="S" status={emailStatus}>{emailErrorMsg}</Text>
                         </div>}
                     </div>
                     <Input id="login_email" name="email" type="email" placeholder="Enter your email" shade="200" size="L" value={email} status={emailStatus} iconBefore={<Icon value="envelope" />} onChange={handleChangeEmail} />
@@ -74,7 +74,7 @@ const LoginForm = ({ cn }: any) => {
                     <div style={{ "display": "flex", "justifyContent": "space-between", "marginBottom": "4px" }}>
                         <Label htmlFor="login_password">Password</Label>
                         {passwordStatus === "fail" && <div className={sx["form_error"]}>
-                            <Text size="small" status={passwordStatus}>{passwordErrorMsg}</Text>
+                            <Text size="S" status={passwordStatus}>{passwordErrorMsg}</Text>
                         </div>}
                     </div>
                     <Input id="login_password" name="password" type={`${showPassword ? "text" : "password"}`} placeholder="Enter your password" shade="200" size="L" value={password} iconBefore={<Icon value="lock" />} status={passwordStatus} onChange={handleChangePassword} />

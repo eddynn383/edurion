@@ -149,3 +149,11 @@
         }
     }
 }
+
+.table-head {
+    .checkbox {
+        .checkbox_checkmark { 
+            background-color: var(--checkbox-light-outer-background-default, var(--background-color-200, #F0F2F4));
+        }
+    }
+}

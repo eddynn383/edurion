@@ -7,6 +7,7 @@ import TableBody from "@/components/TableBody";
 import TableCell from "@/components/TableCell";
 import Checkbox from "@/components/Checkbox";
 import { useState } from "react";
+import TableActions from "@/components/TableActions";
 
 const CoursesList = ({ dataHeading, dataBody }: any) => {
     const [selectedRows, setSelectedRows] = useState<any[]>([]); // State to store selected row IDs
@@ -78,6 +79,7 @@ const CoursesList = ({ dataHeading, dataBody }: any) => {
                                         </TableCell>
                                     )
                                 })}
+                                <TableActions data={item.id} />
                             </TableRow>
                         )
                     })

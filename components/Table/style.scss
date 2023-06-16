@@ -1,13 +1,7 @@
 .table {
     width: 100%;
     padding: var(--table-padding, var(--padding-300, 12px));
-    border-radius: var(--table-border-radius, var(--border-radius-300, 12px));
-    &[data-theme="light"] {
-        background-color: var(--table-light-background-color, var(--background-color-100, #ffffff));
-    }
-    &[data-theme="dark"] {
-        background-color: var(--table-dark-background-color, var(--background-color-950, #242424));
-    }
+    border-radius: var(--table-border-radius, var(--border-radius-300, 12px))
 }
 
 .row-disabled {
@@ -16,4 +10,15 @@
 
 .table-row-children {
     margin: -16px;
+}
+
+[data-theme="light"] {
+    .table {
+        background-color: var(--table-light-background-color, var(--background-color-100, #ffffff));
+    }
+}
+[data-theme="dark"] {
+    .table {
+        background-color: var(--table-dark-background-color, var(--background-color-950, #242424));
+    }
 }

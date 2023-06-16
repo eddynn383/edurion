@@ -40,5 +40,6 @@ export async function saveToDatabase({ public_id, version, signature }: IPropsSa
         console.log("TEst")
         // safe to write to database
         console.log({ public_id })
+        return public_id
     }
 }

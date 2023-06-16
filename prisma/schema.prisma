@@ -122,6 +122,7 @@ model NavigationItem {
     updatedAt    DateTime?        @updatedAt
     isPublish    Boolean          @default(false)
     allowedUsers String[]
+    allowedRoles Roles[]          @default([LEARNER, MANAGER, ADMIN])
     parentId     String?          @db.ObjectId
     parent       NavigationItem?  @relation("NavigationItemsToParent", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
     childItems   NavigationItem[] @relation("NavigationItemsToParent")
@@ -145,7 +146,10 @@ model Course {
     description  String
     image        String
     category     String
-    price        String
+    priceId      String       @db.ObjectId
+    price        Price        @relation(fields: [priceId], references: [id])
+    ratingId     String       @db.ObjectId
+    rating       Rating       @relation(fields: [ratingId], references: [id])
     level        String
     status       CourseStatus @default(DRAFTED)
     startDate    DateTime
@@ -186,6 +190,21 @@ model Enrollment {
 
     @@unique([userId, courseId])
     @@map("Enrollments")
+}
+
+model Price {
+    id       String   @id @default(auto()) @map("_id") @db.ObjectId
+    value    Int
+    currency String
+    discount Float?
+    course   Course[]
+}
+
+model Rating {
+    id      String   @id @default(auto()) @map("_id") @db.ObjectId
+    value   Float    @default(0)
+    reviews Int      @default(0)
+    course  Course[]
 }
 
 enum Roles {

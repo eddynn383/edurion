@@ -1,3 +1,5 @@
+"use server"
+
 import { prisma } from "@/lib/prismadb";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
@@ -6,8 +8,30 @@ export async function getCourses() {
     return prisma.course.findMany()
 }
 
+export async function getCoursePrice(id: string) {
+    if (id) {
+        return prisma.price.findUnique({
+            where: { id },
+        })
+    }
+}
+
+export async function getCourseRating(id: string) {
+    if (id) {
+        return prisma.rating.findUnique({
+            where: { id },
+        })
+    }
+}
+
 export async function getUsers() {
     return prisma.user.findMany()
+}
+
+export async function getUser(id: string) {
+    return prisma.user.findUnique({
+        where: { id }
+    })
 }
 
 export async function getProfiles(user: string | undefined) {

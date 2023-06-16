@@ -30,7 +30,7 @@ const Body = ({ children, orient = "vertical", leftWidth, rightWidth }: any) => 
 
     return (
         <div className={sx['content-body']} data-orient={orient}>
-            <div className={sx["content-body-inner"]} style={orient === "horizontal" ? { "gridTemplateColumns": `${leftWidth} ${rightWidth}` } : {}}>
+            <div className={sx["content-body-inner"]} style={orient === "horizontal" ? { "gridTemplateColumns": `${leftWidth ? leftWidth : "auto"} ${rightWidth ? rightWidth : "auto"}` } : {}}>
                 {children}
             </div>
         </div>

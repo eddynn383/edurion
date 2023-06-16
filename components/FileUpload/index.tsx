@@ -9,8 +9,11 @@ import Link from "@/components/Link";
 import Icon from "@/components/Icon";
 import { formatFileSize } from "@/lib/utils"
 
-import sx from "@/styles/component.module.scss"
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { getSignature, saveToDatabase } from "@/app/_actions";
+import useFileUpload from "@/hooks/useFileUpload";
+import sx from "@/styles/component.module.scss"
+import useCourseFields from "@/hooks/useCourseFields";
 
 export interface FileWithPreview extends File {
     preview: string;
@@ -28,15 +31,21 @@ interface FileUploadProps {
     acceptedSpecificFiles?: string[];
     multiple?: boolean;
     fileLimit?: number;
-    onUpload: (files: FileWithPreview[]) => Promise<void>;
+    onUpload?: (id: string) => void;
+    formAction?: (formData: FormData) => void;
 }
 
-const FileUpload = ({ id, shade = "100", acceptedFiles = "image", acceptedSpecificFiles = [], multiple = false, fileLimit, onUpload }: FileUploadProps) => {
-    const [files, setFiles] = useState<FileWithPreview[]>([])
+const FileUpload = ({ id, shade = "100", acceptedFiles = "image", acceptedSpecificFiles = [], multiple = false, fileLimit, onUpload, formAction }: FileUploadProps) => {
+    // const [files, setFiles] = useState<FileWithPreview[]>([])
+    // const [selectedImage, setSelectedImage] = useState<any>();
     const [rejected, setRejected] = useState<RejectedFile[]>([])
     const [focus, setFocus] = useState<boolean>(false)
     const [validFiles, setValidFiles] = useState<boolean>(false)
     const [invalidFiles, setInvalidFiles] = useState<boolean>(false)
+    const { image, setImage } = useCourseFields()
+    const { files, setFiles } = useFileUpload()
+    const [uploadProgress, setUploadProgress] = useState<number>(0);
+    const [uploading, setUploading] = useState<boolean>(false);
 
     let fileCategory
     switch (acceptedFiles) {
@@ -132,6 +141,53 @@ const FileUpload = ({ id, shade = "100", acceptedFiles = "image", acceptedSpecif
     //     setRejected(files => files.filter(({ file }) => file.name !== name))
     // }
 
+    async function action(files: any) {
+        const file = files[0]
+        console.log("this is uploadImage action function")
+        console.log(file)
+        if (!file) return
+        // setImage(files)
+
+        // get a signature using server action
+        const { timestamp, signature } = await getSignature()
+
+        // upload to cloudinary using the signature
+        const formData = new FormData()
+
+        formData.append('file', file)
+        formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY as string)
+        formData.append('signature', signature)
+        formData.append('timestamp', timestamp)
+        formData.append('folder', 'next')
+
+        const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL as string;
+        const res = await fetch(endpoint, {
+            method: 'POST',
+            body: formData,
+            // onUploadProgress: (progressEvent: ProgressEvent) => {
+            //     const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            //     setUploadProgress(progress);
+            // }
+        }).then(res => res.json())
+
+        // const data = await res.json();
+
+        // console.log(data)
+
+        // write to database using server actions
+        // const imageUrl: any = await saveToDatabase({
+        //     version: res?.version,
+        //     signature: res?.signature,
+        //     public_id: res?.public_id
+        // })
+
+        // console.log(imageUrl)
+        // function onUpload(imageUrl: any) {
+        //     return imageUrl
+        // }
+
+    }
+
     const fileTypes = (type: string) => {
         let fileIcons = "upload"
         if (!type) return fileIcons
@@ -143,8 +199,13 @@ const FileUpload = ({ id, shade = "100", acceptedFiles = "image", acceptedSpecif
     }
 
     useEffect(() => {
-        onUpload(files)
+        // onUpload(files)
+        action(files)
     }, [files])
+
+    // const testFunction = () => {
+    //     return "rrrrrr"
+    // }
 
     return (
         <div

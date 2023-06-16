@@ -2,9 +2,9 @@
 
 import sx from "@/styles/component.module.scss";
 
-const Table = ({ id, style, theme = "light", children }: any) => {
+const Table = ({ id, style, children }: any) => {
     return (
-        <div className={sx["table"]} id={id} role="table" data-theme={theme} style={style}>
+        <div className={sx["table"]} id={id} role="table" style={style}>
             {children}
         </div>
     )
