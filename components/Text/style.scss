@@ -2,15 +2,15 @@
     font-weight: 400;
 
     // Size
-    &[data-size="small"] {
+    &[data-size="S"] {
         font-size: var(--font-size-300);
         font-weight: var(--font-weight-400);
     }
-    &[data-size="medium"] {
+    &[data-size="M"] {
         font-size: var(--font-size-400);
         font-weight: var(--font-weight-400);
     }
-    &[data-size="large"] {
+    &[data-size="L"] {
         font-size: var(--font-size-500);
         font-weight: var(--font-weight-100);
     }

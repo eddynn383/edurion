@@ -1,0 +1,77 @@
+.card {
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    background-color: var(--card-light-background-color, var(--background-color-100, #fff));
+    padding: var(--card-padding, var(--padding-300, 12px));
+    border-radius: var(--card-border-radius, var(--border-radius-350, 18px));
+    gap: var(--card-gap, var(--gap-300, 12px));
+    &-top {
+        aspect-ratio: 16/9;
+        .cover {
+            height: 100%;
+            img {
+                height: 100%;
+            }
+        }
+    }
+    &-bottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: var(--card-bottom-gap, var(--gap-450, 18px));
+        height: 100%;
+        &-top {
+            display: flex;
+            flex-direction: column;
+            gap: var(--card-bottom-top-gap, var(--gap-200, 8px));
+            justify-content: space-between;
+        }
+        &-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: var(--card-bottom-bottom-gap, var(--gap-350, 18px));
+        }
+        .card-price-rating {
+            display: flex;
+            justify-content: space-between;
+        }
+        .card-price {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-050, 2px);
+            &-discount {
+                font-size: var(--font-size-400, 16px);
+            }
+            .card-price-discount + .card-price-value {
+                font-size: var(--card-price-old-value-font-size, var(--font-size-200, 12px));
+                color: var(--card-price-old-value-text-color, var(--text-color-600, #959595));
+                text-decoration: line-through;
+                .green,
+                .red {
+                    color: var(--card-price-discount-text-color, var(--text-color-600, #959595));
+                }
+            }
+            .green {
+                color: var(--card-price-green-text-color, var(--success-color-400, #4CB963));
+            }
+            .red {
+                color: var(--card-price-red-text-color, var(--fail-color-400, #BA2D0B));
+            }
+        }
+        .card-rating {
+            display: flex;
+        }
+        .card-instructor {
+            display: flex;
+            gap: var(--card-instructor-gap, var(--gap-100, 4px));
+            align-items: center;
+            // height: 32px;
+            &-name,
+            &-email {
+                color: var(--card-instructor-name-text-color, var(--text-color-600, #959595));
+                font-size: 12px;
+                max-width: 100px;
+            }
+        }
+    }
+}

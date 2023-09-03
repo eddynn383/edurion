@@ -1,10 +1,9 @@
-import { Status, Theme } from "@/interfaces/global";
+import { Size, Status, Theme } from "@/interfaces/global";
 
 export interface IPropsText {
     cn?: string;
     id?: string;
-    theme?: Theme;
-    size?: "small" | "medium" | "large";
+    size?: Size;
     status?: Status;
     children: React.ReactElement | string;
 }

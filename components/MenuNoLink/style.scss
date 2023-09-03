@@ -27,6 +27,9 @@
         border: var(--border-width-100) solid var(--menu-light-link-border-hover, var(--background-color-200, #E1E6E9));
         color: var(--menu-light-link-color-hover, var(--text-color-950, #ffffff));
     }
+    .icon {
+        color: var(--menu-light-link-icon-color-default, var(--text-color-500, #7A7A7A));
+    }
 } 
 
 [data-theme="dark"] .menu-nolink {

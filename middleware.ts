@@ -42,6 +42,6 @@ export const config = {
         */
 
         // '/((?!auth|catalog|settings|api|_next/static|_next/image|favicon.ico).*)'
-        '/catalog'
+        // '/catalog'
     ]
 }

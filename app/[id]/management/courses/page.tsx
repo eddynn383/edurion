@@ -1,3 +1,5 @@
+// "use client"
+
 // import { getServerSession } from "next-auth/next";
 // import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 // import { redirect } from "next/navigation";
@@ -48,22 +50,20 @@ const Courses = async () => {
     console.log(courses)
 
     return (
-        <>
-            <Content>
-                {/* <Content.Header>
-                    <CoursesActions />
-                </Content.Header> */}
-                <Content.Header>
-                    <Toolbar />
-                </Content.Header>
-                <Content.Body orient="horizontal">
-                    <CoursesList dataHeading={header} dataBody={courses} />
-                    <Side>
-                        bla bla balasdfasdf
-                    </Side>
-                </Content.Body>
-            </Content>
-        </>
+        <Content>
+            {/* <Content.Header>
+                <CoursesActions />
+            </Content.Header> */}
+            <Content.Header>
+                <Toolbar />
+            </Content.Header>
+            <Content.Body orient="horizontal" leftWidth="1fr" rightWidth="300px">
+                <CoursesList dataHeading={header} dataBody={courses} />
+                <Side>
+                    bla bla balasdfasdf
+                </Side>
+            </Content.Body>
+        </Content>
     )
 }
 

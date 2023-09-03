@@ -2,7 +2,7 @@
 
 export interface IPropsCover {
     cn?: string;
-    src?: any;
+    src: any;
     alt: string;
     width?: any;
     height?: any;

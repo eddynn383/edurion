@@ -4,6 +4,10 @@
     border-width: var(--avatar-border-width, var(--border-width-100, 1px));
     border-style: solid;
     overflow: hidden;
+    &[data-size="XS"] {
+        width: var(--avatar-width-xs, var(--size-500, 20px));
+        height: var(--avatar-height-xs, var(--size-500, 20px));
+    }
     &[data-size="S"] {
         width: var(--avatar-width-s, var(--size-600, 24px));
         height: var(--avatar-height-s, var(--size-600, 24px));

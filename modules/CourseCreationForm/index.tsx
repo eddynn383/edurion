@@ -1,6 +1,8 @@
 "use client"
 
 import FileUpload, { FileWithPreview } from "@/components/FileUpload"
+import Button from "@/components/Button"
+import Form from "@/components/Form"
 import Input from "@/components/Input"
 import InputGroup from "@/components/InputGroup"
 import Label from "@/components/Label"
@@ -8,17 +10,33 @@ import Select from "@/components/Select"
 import Text from "@/components/Text"
 import Textarea from "@/components/Textarea"
 import Section from "@/modules/Section"
+import { setCourses } from "@/lib/setData"
 import { useEffect, useState } from "react"
+import { courseSubmitHandler } from "@/lib/utils"
+import { getSignature, saveToDatabase } from "@/app/_actions"
+import useFileUpload from "@/hooks/useFileUpload"
+import useCourseFields from "@/hooks/useCourseFields"
 
-const CourseCreationForm = ({ onSubmit, action }: any) => {
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
-    const [image, setImage] = useState<FileWithPreview[]>([])
-    const [category, setCategory] = useState("")
-    const [price, setPrice] = useState("")
-    const [level, setLevel] = useState("")
-    const [startDate, setStartDate] = useState("")
-    const [endDate, setEndDate] = useState("")
+const CourseCreationForm = ({ setData }: any) => {
+    const { files } = useFileUpload()
+    const {
+        title,
+        setTitle,
+        description,
+        setDescription,
+        image,
+        setImage,
+        category,
+        setCategory,
+        price,
+        setPrice,
+        level,
+        setLevel,
+        startDate,
+        setStartDate,
+        endDate,
+        setEndDate
+    } = useCourseFields()
 
     const levelOptions = [
         {
@@ -39,8 +57,22 @@ const CourseCreationForm = ({ onSubmit, action }: any) => {
         }
     ]
 
-    useEffect(() => {
-        onSubmit({
+    const imageUpload = (id: string) => {
+        console.log(id)
+    }
+
+
+    const submitHandler = (files: any) => {
+        // generated cloud link will look like:
+        // https://res.cloudinary.com/djwqnojjh/image/upload/v1686681358/next/pbuh23vzx1obfuh6ud6p.jpg
+
+        // console.log(files)
+
+        // action(files)
+
+        console.log(image)
+
+        courseSubmitHandler({
             title,
             description,
             image,
@@ -50,10 +82,10 @@ const CourseCreationForm = ({ onSubmit, action }: any) => {
             startDate,
             endDate,
         })
-    }, [title, description, image, category, price, level, startDate, endDate])
+    }
 
     return (
-        <>
+        <Form action={submitHandler}>
             <Section style={{ "height": "100%", "gap": "20px" }}>
                 <Section.Title>Course details</Section.Title>
                 <Section.Content>
@@ -63,8 +95,7 @@ const CourseCreationForm = ({ onSubmit, action }: any) => {
                             <Text>Upload a image which is relevant with your course</Text>
                         </InputGroup>
                         <InputGroup>
-                            {/* <FileUpload id="course-cover" data={data} dispatch={dispatch} /> */}
-                            <FileUpload id="cover" acceptedFiles="image" onUpload={action} />
+                            <FileUpload id="cover" acceptedFiles="image" onUpload={imageUpload} />
                         </InputGroup>
                     </InputGroup>
                     <InputGroup layout="two">
@@ -95,7 +126,7 @@ const CourseCreationForm = ({ onSubmit, action }: any) => {
                                 </InputGroup>
                             </InputGroup> */}
                 </Section.Content>
-                {/* <Button type="submit" size="small" variant="solid" status="accent" content="text" >Save</Button> */}
+                <Button type="submit" size="S" variant="solid" status="accent" content="text" >Save</Button>
             </Section>
             <Section>
                 <Section.Title>Metatags</Section.Title>
@@ -139,7 +170,7 @@ const CourseCreationForm = ({ onSubmit, action }: any) => {
                     </InputGroup>
                 </Section.Content>
             </Section>
-        </>
+        </Form>
     )
 }
 

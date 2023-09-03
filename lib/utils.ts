@@ -1,3 +1,5 @@
+import { setCourses } from "./setData";
+
 // Scroll to section
 export function handleScrollToSection(id: string | undefined) {
     if (!id) {
@@ -18,4 +20,9 @@ export function formatFileSize(size: number) {
     } else {
         return `${kilobytes.toFixed(2)} KB`;
     }
+}
+
+export async function courseSubmitHandler(data: any) {
+    console.log(data)
+    // await setCourses(data)
 }
