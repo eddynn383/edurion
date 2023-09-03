@@ -57,6 +57,7 @@ model User {
     coursesInstructed      Course[]         @relation("Instructor")
     coursesEnrolled        Enrollment[]
     userPreferences        UserPreferences?
+    dashboardId            String
 
     @@unique([email, image])
     @@map("Users")

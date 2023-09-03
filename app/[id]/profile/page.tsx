@@ -15,7 +15,7 @@ const Profile = () => {
                     <Section.Title>My skills</Section.Title>
                     <Section.Content>
                         <p>Aici vor fi afisate skill-urile preferate de user cat si progresul pe fiecare skill</p>
-                        <p>Daca user-ul a primit puncte la alte skill-uri decat cele preferate de el, acestea vor fi ascunse initial, iar daca user-ul doreste sa le vada, prin apasarea unui button "Show all" le v-a putea vedea</p>
+                        <p>Daca user-ul a primit puncte la alte skill-uri decat cele preferate de el, acestea vor fi ascunse initial, iar daca user-ul doreste sa le vada, prin apasarea unui button &quot;Show all&quot; le v-a putea vedea</p>
                     </Section.Content>
                 </Section>
                 <Section>

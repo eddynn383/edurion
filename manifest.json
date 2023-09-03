@@ -1,0 +1,9 @@
+{
+    "name": "Edurion",
+    "short_name": "Edurion",
+    "theme_color": "#1c6bba",
+    "background_color": "#f0f2f4",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/"
+  }
